@@ -1,0 +1,28 @@
+default: &default
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  host: 127.0.0.1
+  port: 3306
+  collation: utf8mb4_general_ci
+
+test:
+  <<: *default
+  database: test
+
+development:
+  <<: *default
+  database: development
+
+production:
+  <<: *default
+  database: <%= ENV['DATABASE_NAME'] %>
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+  local_infile: true
+  aurora_max_retry: 5
+  aurora_disconnect_on_readonly: true

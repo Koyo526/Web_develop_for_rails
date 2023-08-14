@@ -1,0 +1,92 @@
+name: deploy-prod
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push-rails-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: "AWS 認証情報を設定"
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.APP_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.APP_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: "AWS Parameter Store の値を環境変数に登録"
+        run: |
+          # 第1引数がparameter store上のパス, 第2引数が設定する環境変数の名前
+          function set_env_from_parameter_store() {
+              VALUE=$(aws ssm get-parameter --name $1 --with-decryption --query 'Parameter.Value' --output text)
+              echo "$2=$VALUE" >> $GITHUB_ENV
+              echo "::add-mask::$VALUE"
+          }
+          set_env_from_parameter_store '/internship/rails/RAILS_MASTER_KEY' 'RAILS_MASTER_KEY'
+
+      - name: "Amazon ECR にログイン"
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: "Docker リポジトリ用のタグを環境変数に設定"
+        id: set-env
+        run: |
+          ECR_URI=${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY=hr-eng-internship-2023
+          ref=${{ github.ref }}
+          REF_NAME=${ref#refs/heads/*}
+          TAG_NAME=$(echo $REF_NAME | sed -e 's/\//\-/g')
+          GITHUB_SHA=${{ github.sha }}
+          ECR_REPOSITORY_URI=$ECR_URI/$ECR_REPOSITORY
+          echo "REF_NAME=$REF_NAME" >> $GITHUB_ENV
+          echo "GITHUB_SHA=$GITHUB_SHA" >> $GITHUB_ENV
+          echo "ECR_REPOSITORY_URI=$ECR_REPOSITORY_URI" >> $GITHUB_ENV
+          echo "IMAGE_TAG=$ECR_REPOSITORY_URI:$GITHUB_SHA" >> $GITHUB_ENV
+          echo "CACHE_TAG=$ECR_REPOSITORY_URI:build-cache" >> $GITHUB_ENV
+          # 人間が読みやすいようにブランチ名のタグを用意する
+          echo "POINTER_TAG=$ECR_REPOSITORY_URI:$TAG_NAME" >> $GITHUB_ENV
+
+      - name: "Docker イメージのビルド"
+        run: |
+          docker pull "$CACHE_TAG" || true
+          docker build \
+            -f docker/Dockerfile \
+            -t $IMAGE_TAG \
+            --cache-from "$CACHE_TAG" \
+            \
+            --build-arg RAILS_MASTER_KEY=$RAILS_MASTER_KEY \
+            .
+        working-directory: rails
+
+      - name: "Amazon ECR へイメージをプッシュ"
+        run: |
+          docker push $IMAGE_TAG
+          # 次回のビルドのためにキャッシュイメージをpush
+          docker tag $IMAGE_TAG $CACHE_TAG
+          docker push $CACHE_TAG
+          # 人間がECRを見たときにどのイメージがデプロイされているかを認識しやすいようにタグする
+          docker tag $IMAGE_TAG $POINTER_TAG
+          docker push $POINTER_TAG
+        working-directory: rails
+
+  deploy:
+    uses: speee/dx-reusable-workflows/.github/workflows/application-deploy.yml@main
+    needs:
+      - build-and-push-rails-image
+
+    with:
+      env_name: internship
+      repository_name: dx-sandbox-infra
+      branch: production
+      ecr_repository_names: |
+        hr-eng-internship-2023
+      git_user_name: sandbox
+      git_user_email: sandbox@speee.jp
+      enable_slack_notify: false
+    secrets:
+      aws_access_key_id: ${{ secrets.APP_AWS_ACCESS_KEY_ID }}
+      aws_secret_access_key: ${{ secrets.APP_AWS_SECRET_ACCESS_KEY }}
+      ci_user_access_token: ${{ secrets.PERSONAL_ACCESS_TOKEN_OF_SPEEE_IEUL_GITHUB_USER }}

@@ -1,0 +1,36 @@
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rails
+    services:
+      db:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          TZ: 'Asia/Tokyo'
+        ports:
+          - 3306:3306
+    env:
+      RAILS_ENV: test
+      TZ: 'Asia/Tokyo'
+    timeout-minutes: 10
+    steps:
+    - uses: actions/checkout@v3
+
+    # https://docs.github.com/en/enterprise-cloud@latest/actions/automating-builds-and-tests/building-and-testing-ruby
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+        working-directory: rails
+
+    - run: bundle exec rails db:create db:migrate
+    - name: rspec
+      run: bundle exec rspec
