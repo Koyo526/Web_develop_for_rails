@@ -78,7 +78,7 @@ jobs:
       - build-and-push-rails-image
 
     with:
-      env_name: internship
+      env_name: internship-a
       repository_name: dx-sandbox-infra
       branch: production
       ecr_repository_names: |
