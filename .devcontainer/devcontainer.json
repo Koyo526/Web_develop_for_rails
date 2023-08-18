@@ -57,7 +57,7 @@
 	// "forwardPorts": [],
 	
 	// "onCreateCommand": ". /etc/profile.d/rvm.sh && cd /workspaces/hr-eng-internship-2023-sample/rails && rvm install 3.0.6 && bundle install"
-	"onCreateCommand": "bash -c 'rvm install 3.0.6' && bash -i -c 'cd /workspaces/hr-eng-internship-2023-sample/rails && bundle install'",
+	"onCreateCommand": "bash -c 'rvm install 3.0.6' && bash -i -c 'cd /workspaces/hr-eng-internship-2023-1st-team-junkie/rails && bundle install'",
 
 	// "oryx build" will automatically install your dependencies and attempt to build your project
 	"postCreateCommand": "oryx build -p virtualenv_name=.venv --log-file /tmp/oryx-build.log --manifest-dir /tmp || echo 'Could not auto-build. Skipping.'"
