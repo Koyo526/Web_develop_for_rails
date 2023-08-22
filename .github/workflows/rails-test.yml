@@ -30,7 +30,8 @@ jobs:
       with:
         bundler-cache: true
         working-directory: rails
-
+    - name: rubocop
+      run: bundle exec rubocop
     - run: bundle exec rails db:create db:migrate
     - name: rspec
       run: bundle exec rspec
