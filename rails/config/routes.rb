@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount KomachiHeartbeat::Engine => "/ops"
+  mount KomachiHeartbeat::Engine => '/ops'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
