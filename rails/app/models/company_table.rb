@@ -1,0 +1,2 @@
+class CompanyTable < ApplicationRecord
+end

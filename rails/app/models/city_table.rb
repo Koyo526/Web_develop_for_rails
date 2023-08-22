@@ -1,0 +1,2 @@
+class CityTable < ApplicationRecord
+end
