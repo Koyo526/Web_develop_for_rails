@@ -1,0 +1,2 @@
+class DisplayReview < ApplicationRecord
+end
