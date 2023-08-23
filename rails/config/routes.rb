@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'apprisal_request_form', to: 'apprisal_request_form#index'
   mount KomachiHeartbeat::Engine => "/ops"
