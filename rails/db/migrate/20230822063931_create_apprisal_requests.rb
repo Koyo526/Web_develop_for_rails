@@ -17,6 +17,8 @@ class CreateApprisalRequests < ActiveRecord::Migration[7.0]
       t.string :user_name
       t.string :user_name_kana
       t.string :user_tel
+
+      t.timestamps
     end
   end
 end
