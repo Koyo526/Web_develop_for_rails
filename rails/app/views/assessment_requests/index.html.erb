@@ -6,11 +6,13 @@
         
       <div>
         <%= f.label :user_name , "お名前" %>
-        <%= f.text_field :user_name, class: 'form-control' %>
+        <%= f.text_field :user_lastname, class: 'form-control' %>
+        <%= f.text_field :user_firstname, class: 'form-control' %>
       </div>
       <div>
         <%= f.label :user_name_kana , "フリガナ" %>
-        <%= f.text_field :user_name_kana, class: 'form-control' %>
+        <%= f.text_field :user_lastname_kana, class: 'form-control' %>
+        <%= f.text_field :user_firstname_kana, class: 'form-control' %>
       </div>
       <div>
         <%= f.label :user_tel, "電話番号" %>
