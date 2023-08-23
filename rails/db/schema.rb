@@ -10,51 +10,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_22_060152) do
-  create_table "city_tables", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "city_id"
-    t.integer "prefecture_id"
-    t.string "city_name"
+ActiveRecord::Schema[7.0].define(version: 2023_08_23_035235) do
+  create_table "cities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "city_id", null: false
+    t.bigint "prefectures_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["prefectures_id"], name: "index_cities_on_prefectures_id"
+  end
+
+  create_table "companies", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "company_id", null: false
+    t.integer "ieul_id"
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "company_tables", primary_key: "company_id", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "company_name"
+  create_table "offices", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "companies_id", null: false
+    t.integer "office_id", null: false
+    t.integer "ieul_id"
+    t.integer "ieul_office_id"
+    t.string "name"
+    t.string "post_number"
+    t.integer "prefecture_id"
+    t.bigint "cities_id", null: false
+    t.string "address"
     t.string "logo_url"
     t.integer "fax_number"
-    t.string "business_hours"
+    t.string "business_time"
     t.string "regular_holiday"
     t.string "catch_copy"
-    t.string "introduction"
+    t.text "introducion"
     t.string "available_area"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["cities_id"], name: "index_offices_on_cities_id"
+    t.index ["companies_id"], name: "index_offices_on_companies_id"
   end
 
-  create_table "prefecture_tables", primary_key: "prefecture_id", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "prefecture_name"
+  create_table "prefectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "prefecture_id", null: false
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "store_tables", primary_key: "store_id", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "company_id"
-    t.string "store_name"
-    t.string "post_number"
-    t.integer "prefecture_id"
-    t.integer "city_id"
-    t.string "address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "user_experiences", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "company_id"
-    t.integer "store_id"
-    t.integer "experience_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
+  add_foreign_key "cities", "prefectures", column: "prefectures_id"
+  add_foreign_key "offices", "cities", column: "cities_id"
+  add_foreign_key "offices", "companies", column: "companies_id"
 end

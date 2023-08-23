@@ -1,2 +1,0 @@
-class StoreTable < ApplicationRecord
-end

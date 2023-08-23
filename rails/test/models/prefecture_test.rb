@@ -1,6 +1,6 @@
 require "test_helper"
 
-class CompanyTableTest < ActiveSupport::TestCase
+class PrefectureTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
