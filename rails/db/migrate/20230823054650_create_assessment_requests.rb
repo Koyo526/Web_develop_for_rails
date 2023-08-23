@@ -1,11 +1,11 @@
-class CreateApprisalRequests < ActiveRecord::Migration[7.0]
+class CreateAssessmentRequests < ActiveRecord::Migration[7.0]
   def change
-    create_table :apprisal_requests do |t|
+    create_table :assessment_requests do |t|
       t.integer :branch_id
       t.integer :property_city
       t.string :property_address
       t.integer :property_type
-      t.float :property_exclusive_area 
+      t.float :property_exclusive_area
       t.float :property_land_area
       t.float :property_building_area_float
       t.integer :property_building_area_unit
@@ -17,7 +17,6 @@ class CreateApprisalRequests < ActiveRecord::Migration[7.0]
       t.string :user_name
       t.string :user_name_kana
       t.string :user_tel
-
       t.timestamps
     end
   end
