@@ -1,0 +1,63 @@
+<h1>査定依頼フォーム</h1>
+
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_with(url: assessment_requests_url, scope: :assessment_request) do |f| %>
+        
+      <div>
+        <%= f.label :user_name , "お名前" %>
+        <%= f.text_field :user_name, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :user_name_kana , "フリガナ" %>
+        <%= f.text_field :user_name_kana, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :user_tel, "電話番号" %>
+        <%= f.text_field :user_tel, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :user_email , "メールアドレス" %>
+        <%= f.email_field :user_email, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_constructed_year , "築年数" %>
+        <%= f.text_field :property_constructed_year, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_room_plan , "間取り" %>
+        <%= f.collection_select :uproperty_room_plan, class: 'form-control' %> 
+
+      </div>
+      <div>
+        <%= f.label :property_floor_area , "延床面積" %>
+        <%= f.text_field :property_floor_area, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_building_area_unit , "建物面積単位" %>
+        <%= f.collection_select :property_building_area_unit, class: 'form-control' %> 
+
+      </div>
+      <div>
+        <%= f.label :property_building_area, "建物面積" %>
+        <%= f.text_field :property_building_area, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_land_area, "土地面積" %>
+        <%= f.text_field :property_land_area, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_exclusive_area , "専有面積" %>
+        <%= f.text_field :property_exclusive_area , class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_type , "物件種別" %>
+        <%= f.collection_select :property_type, class: 'form-control' %> 
+
+      </div>
+  
+      <% end %>
+  
+    </div>
+  </div>
