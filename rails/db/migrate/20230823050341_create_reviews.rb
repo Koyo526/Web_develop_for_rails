@@ -1,7 +1,6 @@
 class CreateReviews < ActiveRecord::Migration[7.0]
   def change
     create_table :reviews do |t|
-      t.integer :review_id, null: false
       t.integer :user_id, null: false
       t.integer :ieul_id, null: false
       t.integer :ieul_office_id, null: false
