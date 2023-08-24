@@ -57,10 +57,14 @@
         <%= f.select :property_type, @select_type, {include_blank: "選択してください"}, class: 'form-control' %> 
 
       </div>
-      <div>
+      <div class="my-3">
         <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control' %>
       </div>
+
       <% end %>
+      <div class="my-3">
+        <%= link_to '戻る', "/", class: 'btn btn-secondary form-control' %>
+      </div>
   
     </div>
   </div>
