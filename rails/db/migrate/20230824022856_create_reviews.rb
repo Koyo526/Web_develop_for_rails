@@ -4,14 +4,14 @@ class CreateReviews < ActiveRecord::Migration[7.0]
   def change
     create_table :reviews do |t|
       t.integer :user_id, null: false # ユーザID
-      t.references :offices, null: false, foreign_key: true # 店舗ID
+      t.references :office, null: false, foreign_key: true # 店舗ID
       t.integer :ieul_id, null: false # イエウールID
       t.integer :ieul_office_id, null: false # イエウール店舗ID
       t.string :user_name, null: false # 回答者の名前
       t.integer :user_sex, null: false # 性別
       t.integer :user_age, null: false # 年齢
       t.integer :prefecture_id, null: false # 都道府県ID
-      t.references :cities, null: false, foreign_key: true # 市区町村ID
+      t.references :city, null: false, foreign_key: true # 市区町村ID
       t.string :address, null: false # 住所
       t.string :property_type, null: false # 物件種別
       t.integer :number_of_sales, null: false # 売却回数

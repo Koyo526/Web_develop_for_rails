@@ -12,11 +12,11 @@
 
 ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
   create_table "cities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "prefectures_id", null: false
+    t.bigint "prefecture_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["prefectures_id"], name: "index_cities_on_prefectures_id"
+    t.index ["prefecture_id"], name: "index_cities_on_prefecture_id"
   end
 
   create_table "companies", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -27,17 +27,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
   end
 
   create_table "offices", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "companies_id", null: false
+    t.bigint "company_id", null: false
     t.integer "ieul_id", null: false
     t.integer "ieul_office_id", null: false
     t.string "name"
     t.string "post_number"
     t.integer "prefecture_id", null: false
-    t.bigint "cities_id", null: false
+    t.bigint "city_id", null: false
     t.string "address", null: false
     t.string "logo_url", null: false
-    t.integer "phone_number"
-    t.integer "fax_number"
+    t.string "phone_number"
+    t.string "fax_number"
     t.string "business_time"
     t.string "regular_holiday"
     t.string "catch_copy", null: false
@@ -45,8 +45,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.string "available_area", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cities_id"], name: "index_offices_on_cities_id"
-    t.index ["companies_id"], name: "index_offices_on_companies_id"
+    t.index ["city_id"], name: "index_offices_on_city_id"
+    t.index ["company_id"], name: "index_offices_on_company_id"
   end
 
   create_table "prefectures", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -57,14 +57,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
 
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.bigint "offices_id", null: false
+    t.bigint "office_id", null: false
     t.integer "ieul_id", null: false
     t.integer "ieul_office_id", null: false
     t.string "user_name", null: false
     t.integer "user_sex", null: false
     t.integer "user_age", null: false
     t.integer "prefecture_id", null: false
-    t.bigint "cities_id", null: false
+    t.bigint "city_id", null: false
     t.string "address", null: false
     t.string "property_type", null: false
     t.integer "number_of_sales", null: false
@@ -92,13 +92,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.text "improvement_point"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cities_id"], name: "index_reviews_on_cities_id"
-    t.index ["offices_id"], name: "index_reviews_on_offices_id"
+    t.index ["city_id"], name: "index_reviews_on_city_id"
+    t.index ["office_id"], name: "index_reviews_on_office_id"
   end
 
-  add_foreign_key "cities", "prefectures", column: "prefectures_id"
-  add_foreign_key "offices", "cities", column: "cities_id"
-  add_foreign_key "offices", "companies", column: "companies_id"
-  add_foreign_key "reviews", "cities", column: "cities_id"
-  add_foreign_key "reviews", "offices", column: "offices_id"
+  add_foreign_key "cities", "prefectures"
+  add_foreign_key "offices", "cities"
+  add_foreign_key "offices", "companies"
+  add_foreign_key "reviews", "cities"
+  add_foreign_key "reviews", "offices"
 end
