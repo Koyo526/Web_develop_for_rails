@@ -30,5 +30,7 @@ class AssessmentRequestsController < ApplicationController
     ]
   end
 
+  def done; end
+
   def create; end
 end
