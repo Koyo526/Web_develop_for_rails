@@ -1,5 +1,5 @@
 require:
-  - rubocop-
+  - rubocop-rails
   - rubocop-rspec
   - rubocop-capybara
 

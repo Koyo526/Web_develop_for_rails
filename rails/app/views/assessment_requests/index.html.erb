@@ -1,0 +1,95 @@
+<%
+# select で用いる選択肢の配列を定義
+# あとで修正する
+  select_room_plan = [
+    ['分譲マンション',1],
+    ['一戸建て',2],
+    ['土地',3]
+  ]
+
+  select_building_area = [
+    ['1R(ワンルーム)',1],
+    ['1K / 1DK',2],
+    ['1LK / 1LDK',3],
+    ['2K / 2DK',4],
+    ['2LK / 2LDK',5],
+    ['3K / 3DK',6],
+    ['3LK / 3LDK',7],
+    ['4K / 4DK',8],
+    ['4LK / 4LDK',9],
+    ['5K / 5DK',10],
+    ['5LK / 5LDK',11],
+    ['6K / 6DK',12],
+    ['6LK / 6LDK以上',13]
+  ]
+
+  select_type = [
+    ['平方メートル',1],
+    ['坪',2]
+  ]
+%>
+
+<h1>査定依頼フォーム</h1>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_with(url: assessment_requests_url, scope: :assessment_request) do |f| %>
+        
+      <div>
+        <%= f.label :user_name , "お名前" %>
+        <%= f.text_field :user_name, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :user_name_kana , "フリガナ" %>
+        <%= f.text_field :user_name_kana, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :user_tel, "電話番号" %>
+        <%= f.text_field :user_tel, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :user_email , "メールアドレス" %>
+        <%= f.email_field :user_email, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_constructed_year , "築年数" %>
+        <%= f.text_field :property_constructed_year, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_room_plan , "間取り" %>
+        <%= f.select :uproperty_room_plan, select_room_plan, {include_blank: "選択してください"}, class: 'form-control' %> 
+
+      </div>
+      <div>
+        <%= f.label :property_floor_area , "延床面積" %>
+        <%= f.text_field :property_floor_area, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_building_area_unit , "建物面積単位" %>
+        <%= f.select :property_building_area_unit, select_building_area, {include_blank: "選択してください"}, class: 'form-control' %> 
+
+      </div>
+      <div>
+        <%= f.label :property_building_area, "建物面積" %>
+        <%= f.text_field :property_building_area, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_land_area, "土地面積" %>
+        <%= f.text_field :property_land_area, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_exclusive_area , "専有面積" %>
+        <%= f.text_field :property_exclusive_area , class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.label :property_type , "物件種別" %>
+        <%= f.select :property_type, select_type, {include_blank: "選択してください"}, class: 'form-control' %> 
+
+      </div>
+      <div>
+        <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control' %>
+      </div>
+      <% end %>
+  
+    </div>
+  </div>
