@@ -31,3 +31,16 @@
 
 en:
   hello: "Hello world"
+
+en:
+  activerecord:
+    errors:
+      models:
+        assessment_request:
+          attributes:
+            user_tel:
+              invalid_format: 'should be a 10 or 11-digit number starting with 0'
+            user_name:
+              invalid_format: 'should only contain kanji, hiragana, katakana, hyphen-minus (-), and spaces'
+            user_name_kana:
+              invalid_format: 'should only contain katakana, hyphen-minus (-), and spaces'

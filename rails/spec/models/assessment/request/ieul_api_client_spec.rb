@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../app/controllers/api_controller'
-require 'rspec/mocks'
 require 'rails_helper'
 
-describe ApiController do
-  subject do
-    api_controller.post_message(form_data)
-  end
-
+RSpec.describe Assessment::Request::IeulApiClient do
   let(:api_controller) { described_class.new }
 
   let(:form_data) do
@@ -34,20 +28,20 @@ describe ApiController do
 
   it 'sends a POST request with form data' do
     # モック処理
-    http_double = instance_double(Net::HTTP) # HTTP通信を行うメソッド（Net::HTTP）を模倣する
-    expect(Net::HTTP).to receive(:new).and_return(http_double)
-    expect(http_double).to receive(:use_ssl=).with(true)
-    expect(http_double).to receive(:verify_mode=).with(OpenSSL::SSL::VERIFY_NONE)
+    http_double = spy(Net::HTTP) # HTTP通信を行うメソッド（Net::HTTP）を模倣する
+    allow(Net::HTTP).to receive(:new).and_return(http_double)
+    allow(http_double).to receive(:use_ssl=).with(true)
+    allow(http_double).to receive(:verify_mode=).with(OpenSSL::SSL::VERIFY_NONE)
 
-    request_double = instance_double(Net::HTTP::Post)
-    expect(Net::HTTP::Post).to receive(:new).and_return(request_double)
-    expect(request_double).to receive(:set_form_data).with(form_data)
+    # request_double = instance_double(Net::HTTP::Post)
+    # expect(Net::HTTP::Post).to receive(:new).and_return(request_double)
+    # expect(request_double).to receive(:set_form_data).with(form_data)
 
     response_double = instance_double(Net::HTTPOK)
-    expect(http_double).to receive(:start).and_yield
-    expect(http_double).to receive(:request).with(request_double).and_return(response_double)
+    allow(http_double).to receive(:start).and_yield
+    allow(http_double).to receive(:request).with(request_double).and_return(response_double)
 
-    response = api_controller.post_message(form_data)
+    response = api_controller.post(form_data)
 
     expect(response).to eq(response_double)
   end

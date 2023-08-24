@@ -19,15 +19,15 @@ class AssessmentRequest < ApplicationRecord
 
   validates :user_name, presence: true,
                         format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
-                                  message: 'は漢字、ひらがな、カタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です' }
+                                  message: I18n.t('activerecord.errors.models.assessment_request.attributes.some_attribute.invalid_format') }
 
   validates :user_name_kana, presence: true,
                              format: { with: /\A[\p{Katakana}ー\s]+\z/,
-                                       message: 'はカタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です' }
+                                       message: I18n.t('activerecord.errors.models.assessment_request.attributes.some_attribute.invalid_format') }
 
   validates :user_tel, presence: true,
                        numericality: { only_integer: true },
                        length: { in: 10..11 },
-                       format: { with: /\A0\d+\z/,
-                                 message: 'は0で始まる10桁または11桁の数字を入力してください' }
+                       format: { with: /\A0\d{9,10}\z/,
+                                 message: I18n.t('activerecord.errors.models.assessment_request.attributes.user_tel.invalid_format') }
 end
