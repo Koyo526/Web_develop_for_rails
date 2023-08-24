@@ -26,3 +26,27 @@ CSV.foreach('db/csv/companies_master.csv', encoding: 'UTF-8') do |row|
                 phone_number: row[9], fax_number: row[10], business_time: row[11], regular_holiday: row[12],
                 catch_copy: row[13], introducion: row[14], available_area: row[15])
 end
+user_id = 0
+CSV.foreach('db/csv/reviews_master.csv', encoding: 'UTF-8') do |row|
+  city = City.find_by(name: row[6])
+  office = Office.find_by(id: row[1])
+  sex = if row[3] == '男性'
+          0
+        elsif row[3] == '女性'
+          1
+        else
+          2
+        end
+  bool = row[18] == 1
+  Review.create(user_id:, office_id: office.id, ieul_id: row[0], ieul_office_id: row[1], user_name: row[2],
+                user_sex: sex, user_age: row[4], prefecture_id: city.prefecture_id, city_id: city.id, address: row[7],
+                property_type: row[8], number_of_sales: row[9], sale_consideration_date: row[10],
+                assessment_request_date: row[11], selling_date: row[12], sale_date: row[13], release_date: row[14],
+                sales_speed_satisfaction: row[15], assessment_price: row[16], selling_price: row[17],
+                is_discounted: bool, months_to_discount: row[19], discount_price: row[20], contract_price: row[21],
+                contract_price_satisfaction: row[22], intermediary_agreement_type: row[23], headline: row[24],
+                reason_for_sale: row[25], concern_for_sale: row[26], reason_for_choosing_office: row[27],
+                support_satisfaction: row[28], reason_for_support_satiosfaction: row[29], advise: row[30],
+                improvement_point: row[31])
+  user_id += 1
+end
