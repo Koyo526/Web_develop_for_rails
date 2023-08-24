@@ -29,6 +29,9 @@ class AssessmentRequestsController < ApplicationController
       ['坪', 2]
     ]
   end
+  def done;
+
+  end
 
   def create; end
 end
