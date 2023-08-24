@@ -8,7 +8,7 @@ AllCops:
   TargetRubyVersion: 3.1
   TargetRailsVersion: 7.0
   Exclude:
-    - bin/**
+    - bin/**bu
     - vendor/**/*
     - db/schema.rb
     - tmp/**/*
