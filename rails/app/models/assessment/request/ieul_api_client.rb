@@ -4,7 +4,7 @@ require 'uri'
 require 'json'
 
 class Assessment::Request::IeulApiClient
-  API_ENDPOINT = 'https://miniul-api.herokuapp.com/affiliate/v2'
+  API_ENDPOINT = 'https://miniul-api.herokuapp.com'
 
   attr_reader :net_http
 
