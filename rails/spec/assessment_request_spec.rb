@@ -5,7 +5,11 @@ require 'rspec/mocks'
 require 'rails_helper'
 
 describe ApiController do
-  let(:api_controller) { ApiController.new }
+  subject do
+    api_controller.post_message(form_data)
+  end
+
+  let(:api_controller) { described_class.new }
 
   let(:form_data) do
     {
@@ -28,14 +32,7 @@ describe ApiController do
     }
   end
 
-  subject do
-    api_controller.post_message(form_data)
-  end
-
   it 'sends a POST request with form data' do
-    before do
-    end
-
     # モック処理
     http_double = instance_double(Net::HTTP) # HTTP通信を行うメソッド（Net::HTTP）を模倣する
     expect(Net::HTTP).to receive(:new).and_return(http_double)
