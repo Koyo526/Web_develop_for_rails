@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'net/https'
 require 'uri'
 require 'json'
