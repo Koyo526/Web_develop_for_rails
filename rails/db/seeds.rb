@@ -26,12 +26,12 @@ CSV.foreach('db/csv/companies_master.csv', encoding: 'UTF-8') do |row|
                 phone_number: row[9], fax_number: row[10], business_time: row[11], regular_holiday: row[12],
                 catch_copy: row[13], introducion: row[14], available_area: row[15])
 end
-user_id = 0
+user_id = 1
 CSV.foreach('db/csv/reviews_master.csv', encoding: 'UTF-8') do |row|
   city = City.find_by(name: row[6])
   office = Office.find_by(id: row[1])
   bool = row[18] == 1
-  Review.create(user_id:, office_id: office.id, ieul_id: row[0], ieul_office_id: row[1], user_name: row[2],
+  Review.create(user_id:user_id, office_id: office.id, ieul_id: row[0], ieul_office_id: row[1], user_name: row[2],
                 user_sex: row[3], user_age: row[4], prefecture_id: city.prefecture_id, city_id: city.id,
                 address: row[7], property_type: row[8], number_of_sales: row[9], sale_consideration_date: row[10],
                 assessment_request_date: row[11], selling_date: row[12], sale_date: row[13], release_date: row[14],
