@@ -8,9 +8,10 @@ class Assessment::Request::IeulApiClient
 
   def post(params)
     uri = URI.parse("#{API_ENDPOINT}/conversions")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    http = Net::HTTP.new(uri.host, uri.port).tap do | h |
+      h.use_ssl = true
+      h.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
 
     http.start do
       req = Net::HTTP::Post.new(uri.path)
