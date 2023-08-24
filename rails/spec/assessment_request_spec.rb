@@ -1,30 +1,32 @@
-require_relative '../app/controllers/api_controller.rb'
+# frozen_string_literal: true
+
+require_relative '../app/controllers/api_controller'
 require 'rspec/mocks'
 require 'rails_helper'
 
 describe ApiController do
   let(:api_controller) { ApiController.new }
 
-  let(:form_data) {
+  let(:form_data) do
     {
-      "branch_id" => "11111",
-      "property_city" => "1111",
-      "property_address" => "神戸市北区鹿の子台",
-      "property_type" => "1",
-      "property_exclusive_area" => "11111.1",
-      "property_land_area" => "1111.1",
-      "property_building_area_float" => "1111.1",
-      "property_building_area_unit" => "1",
-      "property_floor_area" => "11111.1",
-      "url_param" => "bestsmile",
-      "property_room_plan" => "1",
-      "property_constructed_year" => "16",
-      "user_email" => "john@example.com",
-      "user_name" => "中田　愛刀",
-      "user_name_kana" => "john@example.com",
-      "user_tel" => "090-XXXX-XXXX",
+      'branch_id' => '11111',
+      'property_city' => '1111',
+      'property_address' => '神戸市北区鹿の子台',
+      'property_type' => '1',
+      'property_exclusive_area' => '11111.1',
+      'property_land_area' => '1111.1',
+      'property_building_area_float' => '1111.1',
+      'property_building_area_unit' => '1',
+      'property_floor_area' => '11111.1',
+      'url_param' => 'bestsmile',
+      'property_room_plan' => '1',
+      'property_constructed_year' => '16',
+      'user_email' => 'john@example.com',
+      'user_name' => '中田　愛刀',
+      'user_name_kana' => 'john@example.com',
+      'user_tel' => '090-XXXX-XXXX'
     }
-  }
+  end
 
   subject do
     api_controller.post_message(form_data)
@@ -32,7 +34,6 @@ describe ApiController do
 
   it 'sends a POST request with form data' do
     before do
-
     end
 
     # モック処理
