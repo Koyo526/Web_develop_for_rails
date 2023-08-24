@@ -76,7 +76,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.integer "sales_speed_satisfaction", null: false
     t.integer "assessment_price", null: false
     t.integer "selling_price", null: false
-    t.boolean "is_discounted", null: false
+    t.boolean "is_discounted", default: false, null: false
     t.integer "months_to_discount"
     t.integer "discount_price"
     t.integer "contract_price", null: false
