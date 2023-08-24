@@ -21,5 +21,3 @@ class CreateAssessmentRequests < ActiveRecord::Migration[7.0]
     end
   end
 end
-  end
-end
