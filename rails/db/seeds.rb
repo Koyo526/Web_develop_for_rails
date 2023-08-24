@@ -38,7 +38,7 @@ CSV.foreach('db/csv/reviews_master.csv', encoding: 'UTF-8') do |row|
           2
         end
   bool = row[18] == 1
-  Review.create(user_id:, office_id: office.id, ieul_id: row[0], ieul_office_id: row[1], user_name: row[2],
+  Review.create(user_id:user_id, office_id: office.id, ieul_id: row[0], ieul_office_id: row[1], user_name: row[2],
                 user_sex: sex, user_age: row[4], prefecture_id: city.prefecture_id, city_id: city.id, address: row[7],
                 property_type: row[8], number_of_sales: row[9], sale_consideration_date: row[10],
                 assessment_request_date: row[11], selling_date: row[12], sale_date: row[13], release_date: row[14],
