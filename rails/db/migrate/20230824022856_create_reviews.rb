@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateReviews < ActiveRecord::Migration[7.0]
   def change
     create_table :reviews do |t|
@@ -21,7 +23,7 @@ class CreateReviews < ActiveRecord::Migration[7.0]
       t.integer :sales_speed_satisfaction, null: false # 売却スピードの満足度
       t.integer :assessment_price, null: false # 査定価格
       t.integer :selling_price, null: false # 販売価格
-      t.boolean :is_discounted, null: false # 値下げしたかどうか
+      t.boolean :is_discounted, null: false, default: false # 値下げしたかどうか
       t.integer :months_to_discount # 売り出してから何ヶ月後に値下げしたか
       t.integer :discount_price # 値下げ価格
       t.integer :contract_price, null: false # 成約価格
