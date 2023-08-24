@@ -2,7 +2,7 @@
 
 class CreateReviews < ActiveRecord::Migration[7.0]
   def change
-    create_table :reviews do |t|
+    create_table :reviews do |t| # 口コミテーブル
       t.integer :user_id, null: false # ユーザID
       t.references :office, null: false, foreign_key: true # 店舗ID
       t.integer :ieul_id, null: false # イエウールID

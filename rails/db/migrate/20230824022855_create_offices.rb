@@ -2,7 +2,7 @@
 
 class CreateOffices < ActiveRecord::Migration[7.0]
   def change
-    create_table :offices do |t|
+    create_table :offices do |t| # 店舗テーブル
       t.references :company, null: false, foreign_key: true # 企業ID
       t.integer :ieul_id, null: false # イエウールID
       t.integer :ieul_office_id, null: false # イエウール店舗ID
