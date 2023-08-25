@@ -1,33 +1,27 @@
 <% @offices.each do |office| %>
-    <div class="border">
-        <div class="row my-3">
-            <div class="col-lg-2">
-                <div><%= office.company.name %></div>
-                <div>★
-                    <% if office.reviews.order(release_date: :desc).first %>
+    <% if office.reviews.order(release_date: :desc).first %>
+        <div class="border">
+            <div class="row my-3">
+                <div class="col-lg-2">
+                    <div><%= office.company.name %></div>
+                    <div>★
                         <%= office.reviews.order(release_date: :desc).first.contract_price_satisfaction %>
-                    <% else %>
-                        nil
-                    <% end %>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>営業時間：<%= office.business_time %></div>
+                    <div>定休日：<%= office.regular_holiday %></div>
+                    <div>住所：<%= office.address %></div>
                 </div>
             </div>
-            <div class="col">
-                <div>営業時間：<%= office.business_time %></div>
-                <div>定休日：<%= office.regular_holiday %></div>
-                <div>住所：<%= office.address %></div>
-            </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-lg-2">
-                <div>会社の決め手:</div>
-            </div>
-            <div class="col">
-                <% if office.reviews.order(release_date: :desc).first %>
+            <div class="row my-3">
+                <div class="col-lg-2">
+                    <div>会社の決め手:</div>
+                </div>
+                <div class="col">
                     <%= office.reviews.order(release_date: :desc).first.reason_for_choosing_office %>
-                <% else %>
-                    nil
-                <% end %>
+                </div>
             </div>
         </div>
-    </div>
+    <% end %>
 <% end %>
