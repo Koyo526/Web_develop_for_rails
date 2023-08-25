@@ -1,2 +1,49 @@
-<h1>Reviews#index</h1>
-<p>Find me in app/views/reviews/index.html.erb</p>
+<h1><%= "スムーズな取引ができました" %></h1>
+<div class="my-1">
+    <div>売却した不動産会社名：<%= "あんず不動産" %></div>
+    <div>住所：<%= "東京都港区" %></div>
+    <div>売却の理由：<%= "住み替えのため" %></div>
+    <div>売却経験：<%= "今回の売却が始めて" %></div>
+</div>
+<div class="my-5">
+    <div class="my-3">
+        <div><strong>売却時に不安だったこと</strong></div>
+        <div><%= "
+        住み替えの為に売却する事を考えましたが、築30年以上のマンションだったので本当に売れるのか不安でした。加えて、最初に冷やかしの人が見学にきていたので、不安が増していきました。
+        " %></div>
+    </div>
+    <div class="my-3">
+        <div><strong>この会社に決めた決め手</strong></div>
+        <div><%= "かなり積極的に対応してくれ、買い手探しも手広くやってくれましたのでこちらでお願いさせて頂きました。" %></div>
+    </div>
+    <div class="my-3">
+        <div><strong>不動産会社の対応満足度：★<%= 5 %></strong></div>
+        <div><%= "ほとんど担当者の方がやってくださりとても楽でした。何かあるときは必ず電話で確認をとってくれてとても信用できました。迅速な対応がとても良かったです。"%></div>
+    </div>
+    <div class="my-3">
+        <div><strong>今後売却する人へのアドバイス<</strong>/div>
+        <div><%= "会社選びが大切なので、しっかりと信頼できる会社を選んだほうが良いと思います。とはいえ、価格について、タイミングと会社の方針もあるので比較したほうが良いです。" %></div>
+    </div>
+    <div class="my-3">
+        <div><strong>不動産会社に改善してほしい点</strong></div>
+        <div><%= "店舗前に駐車場があれば良かった。" %></div>
+    </div>
+    <div class="my-3">
+        <div><strong>売却時期と価格について</strong></div>
+        <div><%= "表を貼る" %></div>
+    </div>
+</div>
+
+<div class="my-1">
+    <div><strong><%= "あんず不動産" %>について</strong></div>
+    <div>企業名：<%= "あんず不動産" %></div>
+    <div>郵便番号：<%= "000-0000" %></div>
+    <div>住所：<%= "東京都港区六本木一丁目" %></div>
+    <div>電話番号：<%= "30-0000-0000" %></div>
+    <div>FAX：<%= "30-0000-0000" %></div>
+    <div>営業時間：<%= "9:00-18:00" %></div>
+    <div>定休日：<%= "水曜日、GW" %></div>
+</div>
+<div class="w-25">
+    <%= link_to '査定依頼をする', '/assessment_requests', class: 'btn btn-primary form-control' %>
+</div>
