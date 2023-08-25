@@ -7,90 +7,39 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-Company.create!(
-  ieul_id: 1,
-  name: 'A不動産'
-)
-Company.create!(
-  ieul_id: 2,
-  name: 'B不動産'
-)
-Company.create!(
-  ieul_id: 3,
-  name: 'C不動産'
-)
-Prefecture.create!(
-  name: '北海道'
-)
-Prefecture.create!(
-  name: '青森'
-)
-City.create!(
-  prefecture_id: 1,
-  name: '札幌市'
-)
-City.create!(
-  prefecture_id: 1,
-  name: '北広島市'
-)
-City.create!(
-  prefecture_id: 2,
-  name: '青森市'
-)
-Office.create!(
-  company_id: 1, ieul_id: 1, ieul_office_id: 1, name: 'A支店',
-  post_number: '000-0000', prefecture_id: 1, city_id: 1, address: 'AAAA-AAAAA',
-  logo_url: 'xxxx.com', phone_number: '09012345678', fax_number: '08012345678',
-  business_time: '00:00~23:59', regular_holiday: 'Weekday', catch_copy: 'Pokemon Get daze',
-  introducion: 'Pokemon Sleep', available_area: '653,483'
-)
-Office.create!(
-  company_id: 2, ieul_id: 2, ieul_office_id: 2, name: 'B支店',
-  post_number: '000-0000', prefecture_id: 1, city_id: 2, address: 'BBBB-BBBBB',
-  logo_url: 'xxxx.com', phone_number: '09012345678', fax_number: '08012345678',
-  business_time: '00:00~23:59', regular_holiday: 'Weekday', catch_copy: 'Pokemon Get daze',
-  introducion: 'Pokemon Sleep', available_area: '653,483'
-)
-Office.create!(
-  company_id: 3, ieul_id: 3, ieul_office_id: 3, name: 'C支店',
-  post_number: '000-0000', prefecture_id: 2, city_id: 3, address: 'CCCC-CCCC',
-  logo_url: 'xxxx.com', phone_number: '09012345678', fax_number: '08012345678',
-  business_time: '00:00~23:59', regular_holiday: 'Weekday', catch_copy: 'Pokemon Get daze',
-  introducion: 'Pokemon Sleep', available_area: '653,483'
-)
-Review.create!(
-  user_id: 123,
-  office_id: 1,
-  ieul_id: 1,
-  ieul_office_id: 1,
-  user_name: 'hoge',
-  user_sex: 1,
-  user_age: 10,
-  prefecture_id: 1,
-  city_id: 1,
-  address: '中央区1-1',
-  property_type: 'マンション',
-  number_of_sales: 0,
-  sale_consideration_date: '2018-02-14',
-  assessment_request_date: '2018-03-14',
-  selling_date: '2018-04-14',
-  sale_date: '2018-05-14',
-  release_date: '2018-06-14',
-  sales_speed_satisfaction: 1,
-  assessment_price: 10_000,
-  selling_price: 10_000,
-  is_discounted: false,
-  months_to_discount: nil,
-  discount_price: nil,
-  contract_price: 10_000,
-  contract_price_satisfaction: 4,
-  intermediary_agreement_type: 1,
-  headline: 'hogehoge',
-  reason_for_sale: 'hogehogeho--ge',
-  concern_for_sale: 'ho-ge',
-  reason_for_choosing_office: 'hogegege',
-  support_satisfaction: '2',
-  reason_for_support_satiosfaction: 'hohohoho',
-  advise: 'hahahaha',
-  improvement_point: 'ganbare'
-)
+require 'csv'
+
+CSV.foreach('db/csv/companies_master.csv', encoding: 'UTF-8') do |row|
+  Company.create(ieul_id: row[2], name: row[0])
+end
+CSV.foreach('db/csv/prefectures_master.csv', encoding: 'UTF-8') do |row|
+  Prefecture.create(name: row[1])
+end
+CSV.foreach('db/csv/cities_master.csv', encoding: 'UTF-8') do |row|
+  City.create(prefecture_id: row[1], name: row[2])
+end
+CSV.foreach('db/csv/companies_master.csv', encoding: 'UTF-8') do |row|
+  city = City.find_by(name: row[7])
+  company = Company.find_by(id: row[2])
+  Office.create(company_id: company.id, ieul_id: row[2], ieul_office_id: row[3], name: row[1], post_number: row[5],
+                prefecture_id: city.prefecture_id, city_id: city.id, address: row[8], logo_url: row[4],
+                phone_number: row[9], fax_number: row[10], business_time: row[11], regular_holiday: row[12],
+                catch_copy: row[13], introducion: row[14], available_area: row[15])
+end
+userid = 1
+CSV.foreach('db/csv/reviews_master.csv', encoding: 'UTF-8') do |row|
+  city = City.find_by(name: row[6])
+  office = Office.find_by(id: row[1])
+  bool = row[18] == 1
+  Review.create(user_id: userid, office_id: office.id, ieul_id: row[0], ieul_office_id: row[1], user_name: row[2],
+                user_sex: row[3], user_age: row[4], prefecture_id: city.prefecture_id, city_id: city.id,
+                address: row[7], property_type: row[8], number_of_sales: row[9], sale_consideration_date: row[10],
+                assessment_request_date: row[11], selling_date: row[12], sale_date: row[13], release_date: row[14],
+                sales_speed_satisfaction: row[15], assessment_price: row[16], selling_price: row[17],
+                is_discounted: bool, months_to_discount: row[19], discount_price: row[20], contract_price: row[21],
+                contract_price_satisfaction: row[22], intermediary_agreement_type: row[23], headline: row[24],
+                reason_for_sale: row[25], concern_for_sale: row[26], reason_for_choosing_office: row[27],
+                support_satisfaction: row[28], reason_for_support_satiosfaction: row[29], advise: row[30],
+                improvement_point: row[31])
+  userid += 1
+end
