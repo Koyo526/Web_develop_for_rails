@@ -26,5 +26,11 @@ module Rail
 
     # デフォルトのlocaleを日本語(:ja)にする
     config.i18n.default_locale = :ja
+
+    config.generators do |g|
+      g.test_framework :rspec, fixture: false
+      g.view_specs      false
+      g.helper_specs    false
+    end
   end
 end
