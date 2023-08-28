@@ -1,7 +1,9 @@
+<%= @reviews.each do |review|%>
 <div class="border my-3">
-    <div><strong><%= "スムーズな取引ができました" %>：★<%= "5" %></strong></div>
-    <div><%= "ほとんど担当者の方がやってくださりとても楽でした。何かあるときは必ず電話で確認をとってくれてとても信用できました。迅速な対応がとても良かったです。" %></div>
+    <div><strong><%=  review.headline %>：★<%= review.contract_price_satisfaction %></strong></div>
+    <div><%= review.reason_for_support_satiosfaction %></div>
     <div class=" offset-lg-7">
-        成約価格 <%= "1,500万円" %>（<%= "千葉県川市" %>・<%= "2019年2月"%>に売却）
+        成約価格 <%= review.contract_price %>（<%= review.city.name %>・<%= review.sale_date%>に売却）
     </div>
 </div>
+<% end %>
