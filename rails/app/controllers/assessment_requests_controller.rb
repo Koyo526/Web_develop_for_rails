@@ -32,5 +32,14 @@ class AssessmentRequestsController < ApplicationController
 
   def done; end
 
-  def create; end
+  def create
+    # @assessment_request = AssessmentRequest.new(params[:assessment_request])
+    render 'done', status: :ok
+  end
+
+  private
+  
+  def assessment_params
+    
+  end
 end

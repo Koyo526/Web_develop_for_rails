@@ -2,8 +2,8 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= form_with(url: assessment_requests_url, scope: :assessment_request) do |f| %>
-        
+      <%= form_with(url: '/assessment_requests',method: :post,scope: :assessment_request) do |f| %>
+
       <div>
         <%= f.label :user_name , "お名前" %>
         <%= f.text_field :user_lastname, class: 'form-control' %>
