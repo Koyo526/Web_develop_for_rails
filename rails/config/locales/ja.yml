@@ -29,5 +29,16 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+
+jp:
+  activerecord:
+    errors:
+      models:
+        assessment_request:
+          attributes:
+            user_tel:
+              invalid_format: 'は0で始まる10桁または11桁の数字を入力してください'
+            user_name:
+              invalid_format: 'は漢字、ひらがな、カタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です'
+            user_name_kana:
+              invalid_format: 'はカタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です'
