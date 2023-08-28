@@ -76,6 +76,41 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "questionnaire_answers", primary_key: "review_id", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "send_target_users_id", null: false
+    t.integer "ieul_id"
+    t.integer "ieul_offic_id"
+    t.string "user_name"
+    t.integer "user_sex"
+    t.integer "user_age"
+    t.integer "property_id"
+    t.integer "prefecture_id"
+    t.integer "city_id"
+    t.string "addres"
+    t.string "property_type"
+    t.date "assessment_request_data"
+    t.date "selling_date"
+    t.date "sale_date"
+    t.date "release_date"
+    t.integer "assessment_price"
+    t.integer "selling_price"
+    t.boolean "is_discounted", default: false, null: false
+    t.integer "months_to_discount"
+    t.integer "discount_price"
+    t.integer "contrace_price"
+    t.integer "intermediary_agreement_type"
+    t.string "headline"
+    t.integer "reason_for_sale"
+    t.text "concern_for_sale"
+    t.text "reason_for_choosing_office"
+    t.integer "support_satisfaceion"
+    t.text "reason_for_support_satisfaction"
+    t.text "advise"
+    t.text "improvement_point"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["send_target_users_id"], name: "index_questionnaire_answers_on_send_target_users_id"
+  end
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.bigint "office_id", null: false
@@ -117,9 +152,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.index ["office_id"], name: "index_reviews_on_office_id"
   end
 
+  create_table "send_target_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "email_address"
+    t.boolean "opt_out", default: false, null: false
+    t.boolean "check_response", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sent_emails", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "send_target_users_id", null: false
+    t.string "email_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["send_target_users_id"], name: "index_sent_emails_on_send_target_users_id"
+  end
+
   add_foreign_key "cities", "prefectures"
   add_foreign_key "offices", "cities"
   add_foreign_key "offices", "companies"
+  add_foreign_key "questionnaire_answers", "send_target_users", column: "send_target_users_id"
   add_foreign_key "reviews", "cities"
   add_foreign_key "reviews", "offices"
+  add_foreign_key "sent_emails", "send_target_users", column: "send_target_users_id"
 end
