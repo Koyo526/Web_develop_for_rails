@@ -22,13 +22,15 @@ CSV.foreach('db/csv/companies_master.csv', encoding: 'UTF-8') do |row|
   city = City.find_by(name: row[7])
   company = Company.find_by(id: row[2])
   available_area_ids = row[15].split(',')
-  available_cities = City.find(available_area_ids)
-  office = Office.create(company_id: company.id, ieul_id: row[2], ieul_office_id: row[3], name: row[1], post_number: row[5],
+  City.find(available_area_ids)
+  Office.create(company_id: company.id, ieul_id: row[2], ieul_office_id: row[3], name: row[1], post_number: row[5],
                 prefecture_id: city.prefecture_id, city_id: city.id, address: row[8], logo_url: row[4],
                 phone_number: row[9], fax_number: row[10], business_time: row[11], regular_holiday: row[12],
                 catch_copy: row[13], introducion: row[14], available_area: row[15])
-  
-  available_area_ids.each{|available_area_id| AssessableArea.find_or_create_by!(city_id: available_area_id, office_id: row[2])}
+
+  available_area_ids.each do |available_area_id|
+    AssessableArea.find_or_create_by!(city_id: available_area_id, office_id: row[2])
+  end
   # available_cities.each{ |available_city| office.assessable_cities << available_city }
 end
 userid = 1
