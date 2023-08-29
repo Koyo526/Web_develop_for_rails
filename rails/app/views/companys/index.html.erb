@@ -1,28 +1,32 @@
-<h1><%= "$企業名$店舗名" %></h1>
-<div class="row my-3">
-    <div class="col">
-        <div><%= "不動産の売却はあんず不動産にお任せください" %></div>
-        <div><%= "あんず不動産赤坂支店にお任せください！東京都の不動産売却の実績多数です。" %></div>
-    </div>
-    <div class="col"><%= "ロゴ画像"%></div>
-</div>
-<div class="row">
-    <div class="col">レーダーチャート</div>
-    <div class="col">
-        <div><strong><%= "あんず不動産"%>について</strong></div>
-        <div>企業名：<%= "あんず不動産" %></div>
-        <div>郵便番号：<%= "000-0000" %></div>
-        <div>住所：<%= "東京都港区六本木一丁目" %></div>
-        <div>電話番号：<%= "03-0000-0000" %></div>
-        <div>FAX：<%= "03-0000-0000" %></div>
-        <div>営業時間：<%= "9:00-18:00" %></div>
-        <div>定休日：<%= "水曜日、GW" %></div>
-    </div>
-</div>
-<div>
-    <div><strong><%= "あんず不動産"%>で売却したひとの不動産会社についての口コミ（平均評価★<%=3.5%>）</strong></div>
-    <%= render 'shared/review_card' %>
-    <%= render 'shared/review_card' %>
-    <%= render 'shared/review_card' %>
-    <%= render 'shared/review_card' %>
+<% if @office %>
+    <% if @office.reviews.order(release_date: :desc).first %>
+        <h1><%= @company_name %>・<%= @office.name %></h1>
+        <div class="row my-3">
+            <div class="col">
+                <div><%= @office.catch_copy %></div>
+                <div><%= @office.introducion %></div>
+            </div>
+            <div class="col"><%= image_tag @office.logo_url, alt: "企業アイコン" %></div>
+        </div>
+        <div class="row">
+            <div class="col">レーダーチャート</div>
+            <div class="col">
+                <div><strong><%= @company_name %>について</strong></div>
+                <div>企業名：<%= @company_name%></div>
+                <div>郵便番号：<%= @office.post_number %></div>
+                <div>住所：<%= @office.address %></div>
+                <div>電話番号：<%= @office.phone_number%></div>
+                <div>FAX:<%= @office.fax_number %></div>
+                <div>営業時間：<%= @office.business_time %></div>
+                <div>定休日：<%= @office.regular_holiday %></div>
+            </div>
+        </div>
+        <div>
+            <div><strong><%= @company_name %>で売却したひとの不動産会社についての口コミ（平均評価★<%= @average_satisfaction %>）</strong></div>
+            <%= render 'shared/review_card' %>
+        </div>
+    <% end %>
+<% end %>
+<div class="mx-auto" style="width: 200px">
+    <%= link_to '査定依頼をする', "/assessment_requests", class: 'btn btn-primary form-control' %>
 </div>
