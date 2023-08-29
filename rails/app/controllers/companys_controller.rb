@@ -11,5 +11,11 @@ class CompanysController < ApplicationController
 
     total_satisfaction = @reviews.sum(:contract_price_satisfaction)
     @average_satisfaction = total_satisfaction / @reviews.length.to_f
+
+    total_contract_price_satisfaction = @reviews.sum(:contract_price_satisfaction)
+    @average_contract_price_satisfaction = total_contract_price_satisfaction / @reviews.length.to_f
+
+    total_sales_speed_satisfaction = @reviews.sum(:sales_speed_satisfaction)
+    @average_sales_speed_satisfaction = total_sales_speed_satisfaction / @reviews.length.to_f
   end
 end

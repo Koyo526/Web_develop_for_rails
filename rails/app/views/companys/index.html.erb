@@ -8,8 +8,38 @@
             </div>
             <div class="col"><%= image_tag @office.logo_url, alt: "企業アイコン" %></div>
         </div>
-        <div class="row">
-            <div class="col">レーダーチャート</div>
+        <div class="row ">
+            <div class="col d-flex justify-content-center">
+                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
+                <div style="position:relative;width:50%;"><canvas id="myChart" %></canvas>
+                <script>
+                    var ctx = document.getElementById("myChart");
+                    var myChart = new Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: ["対応満足度", "売却スピード","売却価格"],
+                            datasets: [{
+                                label: "<%= j @company_name %>",
+                                data: [<%= @average_satisfaction%>, <%= @average_contract_price_satisfaction %>, <%= @average_sales_speed_satisfaction%>],
+                                backgroundColor: "rgba(67, 133, 215, 0.5)",  //グラフ背景色
+                                borderColor: "rgba(67, 133, 215, 1)",        //グラフボーダー色
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                r: {
+                                    max: 5,        //グラフの最大値
+                                    min: 0,        //グラフの最小値
+                                    ticks: {
+                                        stepSize: 1  //目盛間隔
+                                    }
+                                }
+                            },
+                        }
+                    });
+                </script></div>
+
+            </div>
             <div class="col">
                 <div><strong><%= @company_name %>について</strong></div>
                 <div>企業名：<%= @company_name%></div>
