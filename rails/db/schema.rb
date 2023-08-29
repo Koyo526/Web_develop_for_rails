@@ -14,6 +14,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
   create_table "assessable_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "office_id", null: false, comment: "企業ID"
     t.bigint "city_id", null: false, comment: "市区町村ID"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id", "office_id"], name: "index_assessable_areas_on_city_id_and_office_id", unique: true
     t.index ["city_id"], name: "index_assessable_areas_on_city_id"
     t.index ["office_id"], name: "index_assessable_areas_on_office_id"
   end
