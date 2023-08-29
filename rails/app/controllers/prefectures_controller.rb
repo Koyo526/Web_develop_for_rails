@@ -3,6 +3,5 @@
 class PrefecturesController < ApplicationController
   def index
     @offices = Office.all
-    @reviews = Review.all
   end
 end
