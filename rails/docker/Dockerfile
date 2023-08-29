@@ -4,6 +4,7 @@ ENV TZ Asia/Tokyo
 ARG RAILS_MASTER_KEY
 ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES=true
 
 RUN gem install bundler:2.3.19
 RUN curl -sL https://deb.nodesource.com/setup_18.x | bash
