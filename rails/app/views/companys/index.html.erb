@@ -10,13 +10,15 @@
         </div>
         <div class="row ">
             <div class="col d-flex justify-content-center">
-                <div data-controller="barchart">
-  <canvas id="bar-chart" data-barchart-target="myChart" width="800" height="450"></canvas>
-</div>
-                    <%# <%= javascript_path 'chart_script' %>
+                <div data-controller="chart" 
+                    data-chart-rader-value='<%= @chart_data.to_json %>'
+                >
+                    <canvas 
+                        data-chart-target="canvas"
+                    ></canvas>
                 </div>
-
             </div>
+
             <div class="col">
                 <div><strong><%= @company_name %>について</strong></div>
                 <div>企業名：<%= @company_name%></div>
