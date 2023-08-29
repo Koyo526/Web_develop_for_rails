@@ -122,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
     t.datetime "updated_at", null: false
     t.index ["send_target_users_id"], name: "index_questionnaire_answers_on_send_target_users_id"
   end
+
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.bigint "office_id", null: false
