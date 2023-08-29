@@ -30,7 +30,12 @@ class AssessmentRequestsController < ApplicationController
     ]
   end
 
-  def done; end
+  def create
+    # @assessment_request = AssessmentRequest.new(params[:assessment_request])
+    redirect_to assessment_requests_thanks
+  end
 
-  def create; end
+  private
+
+  def assessment_params; end
 end

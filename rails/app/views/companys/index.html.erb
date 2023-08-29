@@ -1,2 +1,32 @@
-<h1>Companys#index</h1>
-<p>Find me in app/views/companys/index.html.erb</p>
+<% if @office %>
+    <% if @office.reviews.order(release_date: :desc).first %>
+        <h1><%= @company_name %>・<%= @office.name %></h1>
+        <div class="row my-3">
+            <div class="col">
+                <div><%= @office.catch_copy %></div>
+                <div><%= @office.introducion %></div>
+            </div>
+            <div class="col"><%= image_tag @office.logo_url, alt: "企業アイコン" %></div>
+        </div>
+        <div class="row">
+            <div class="col">レーダーチャート</div>
+            <div class="col">
+                <div><strong><%= @company_name %>について</strong></div>
+                <div>企業名：<%= @company_name%></div>
+                <div>郵便番号：<%= @office.post_number %></div>
+                <div>住所：<%= @office.address %></div>
+                <div>電話番号：<%= @office.phone_number%></div>
+                <div>FAX:<%= @office.fax_number %></div>
+                <div>営業時間：<%= @office.business_time %></div>
+                <div>定休日：<%= @office.regular_holiday %></div>
+            </div>
+        </div>
+        <div>
+            <div><strong><%= @company_name %>で売却したひとの不動産会社についての口コミ（平均評価★<%= @average_satisfaction %>）</strong></div>
+            <%= render 'shared/review_card' %>
+        </div>
+    <% end %>
+<% end %>
+<div class="mx-auto" style="width: 200px">
+    <%= link_to '査定依頼をする', "/assessment_requests", class: 'btn btn-primary form-control' %>
+</div>

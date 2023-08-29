@@ -14,23 +14,13 @@ class AssessmentRequest < ApplicationRecord
   validates :property_room_plan, presence: true
   validates :property_constructed_year, presence: true
   validates :user_email, presence: true,
-                         length: { maximum: 100 },
-                         format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
-
+                         length: { maximum: 100 }
   validates :user_name, presence: true,
-                        format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
-                                  message: I18n.t('activerecord.errors.models.assessment_request.
-                                    attributes.some_attribute.invalid_format') }
-
+                        format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/ }
   validates :user_name_kana, presence: true,
-                             format: { with: /\A[\p{Katakana}ー\s]+\z/,
-                                       message: I18n.t('activerecord.errors.models.assessment_request.
-                                        attributes.some_attribute.invalid_format') }
-
+                             format: { with: /\A[\p{Katakana}ー\s]+\z/ }
   validates :user_tel, presence: true,
                        numericality: { only_integer: true },
                        length: { in: 10..11 },
-                       format: { with: /\A0\d{9,10}\z/,
-                                 message: I18n.t('activerecord.errors.models.assessment_request.
-                                  attributes.user_tel.invalid_format') }
+                       format: { with: /\A0\d{9,10}\z/ }
 end

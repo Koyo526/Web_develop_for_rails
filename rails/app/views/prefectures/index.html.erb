@@ -1,2 +1,4 @@
-<h1>Prefectures#index</h1>
-<p>Find me in app/views/prefectures/index.html.erb</p>
+<h1>都道府県/市区町村の不動産会社</h1>
+<% @offices.each do |office| %>
+  <%= render 'shared/company_card', office: office %>
+<% end %>
