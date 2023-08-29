@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'prefectures/index'
+  get 'prefectures/:prefecture_id/cities/:city_id', to: 'prefectures#index'
   get 'reviews/index'
   get 'companys/index'
   resources :assessment_requests, only: %i[index create]
