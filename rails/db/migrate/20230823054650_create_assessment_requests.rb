@@ -2,9 +2,9 @@
 
 class CreateAssessmentRequests < ActiveRecord::Migration[7.0]
   def change
-    create_table :assessment_requests do |t|
-      t.integer :branch_id # 査定依頼を出したいイエウールの店舗id
-      t.integer :property_city # 物件の市区ID
+    create_table :assessment_requests do |t| # 査定依頼テーブル
+      t.references :office # 査定依頼を出したいイエウールの店舗id（branch_id）
+      t.references :city # 物件の市区ID
       t.string :property_address # 査定依頼する物件の住所
       t.integer :property_type # 物件種別 (1: '分譲マンション', 2: '一戸建て', 3: '土地')
       t.float :property_exclusive_area # 専有面積
