@@ -10,24 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
-  create_table "apprisal_requests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "branch_id"
-    t.integer "property_city"
-    t.string "property_address"
-    t.integer "property_type"
-    t.float "property_exclusive_area"
-    t.float "property_land_area"
-    t.float "property_building_area_float"
-    t.integer "property_building_area_unit"
-    t.float "property_floor_area"
-    t.string "url_param"
-    t.integer "property_room_plan"
-    t.integer "property_constructed_year"
-    t.string "user_email"
-    t.string "user_name"
-    t.string "user_name_kana"
-    t.string "user_tel"
+ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
+  create_table "assessable_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "office_id", null: false, comment: "企業ID"
+    t.bigint "city_id", null: false, comment: "市区町村ID"
+    t.index ["city_id"], name: "index_assessable_areas_on_city_id"
+    t.index ["office_id"], name: "index_assessable_areas_on_office_id"
   end
 
   create_table "assessment_requests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -101,13 +89,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.integer "ieul_id", null: false
     t.integer "ieul_office_id", null: false
     t.string "user_name", null: false
-    t.integer "user_sex", null: false
+    t.string "user_sex", null: false
     t.integer "user_age", null: false
     t.integer "prefecture_id", null: false
     t.bigint "city_id", null: false
     t.string "address", null: false
     t.string "property_type", null: false
-    t.integer "number_of_sales", null: false
+    t.string "number_of_sales", null: false
     t.date "sale_consideration_date", null: false
     t.date "assessment_request_date", null: false
     t.date "selling_date", null: false
@@ -136,6 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_24_022856) do
     t.index ["office_id"], name: "index_reviews_on_office_id"
   end
 
+  add_foreign_key "assessable_areas", "cities"
+  add_foreign_key "assessable_areas", "offices"
   add_foreign_key "cities", "prefectures"
   add_foreign_key "offices", "cities"
   add_foreign_key "offices", "companies"
