@@ -7,6 +7,6 @@ class CreateAssessableAreas < ActiveRecord::Migration[7.0]
       t.references :city, null: false, foreign_key: true, comment: '市区町村ID'
       t.timestamps
     end
-    # add_index :assessable_areas,[:city_id,:office_id],unique: true
+    add_index :assessable_areas,[:city_id,:office_id],unique: true
   end
 end
