@@ -2,8 +2,8 @@
 
 Rails.application.routes.draw do
   get 'prefectures/:prefecture_id/cities/:city_id', to: 'prefectures#index', as: 'prefecture'
-  get 'reviews/index'
-  get 'companys/index'
+  resources :reviews
+  resources :companys
   resources :assessment_requests, only: %i[index create]
   get 'assessment_requests/done', to: 'assessment_requests#done'
   mount KomachiHeartbeat::Engine => '/ops'
