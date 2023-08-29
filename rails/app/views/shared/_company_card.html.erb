@@ -1,29 +1,27 @@
-<% @offices.each do |office| %>
-    <% if office.reviews.order(release_date: :desc).first %>
-        <div class="border">
-            <%= link_to "/companys/index", class: "a-company" do %>
-                <div class="row my-3">
-                    <div class="col-lg-2">
-                        <div><%= office.company.name %></div>
-                        <div>★
-                            <%= office.reviews.order(release_date: :desc).first.contract_price_satisfaction %>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div>営業時間：<%= office.business_time %></div>
-                        <div>定休日：<%= office.regular_holiday %></div>
-                        <div>住所：<%= office.address %></div>
+<% if office.reviews.order(release_date: :desc).first %>
+    <div class="border">
+        <%= link_to "/companys/index", class: "a-company" do %>
+            <div class="row my-3">
+                <div class="col-lg-2">
+                    <div><%= office.company.name %></div>
+                    <div>★
+                        <%= office.reviews.order(release_date: :desc).first.contract_price_satisfaction %>
                     </div>
                 </div>
-                <div class="row my-3">
-                    <div class="col-lg-2">
-                        <div>会社の決め手:</div>
-                    </div>
-                    <div class="col">
-                        <%= office.reviews.order(release_date: :desc).first.reason_for_choosing_office %>
-                    </div>
+                <div class="col">
+                    <div>営業時間：<%= office.business_time %></div>
+                    <div>定休日：<%= office.regular_holiday %></div>
+                    <div>住所：<%= office.address %></div>
                 </div>
-            <% end %>
-        </div>
-    <% end %>
+            </div>
+            <div class="row my-3">
+                <div class="col-lg-2">
+                    <div>会社の決め手:</div>
+                </div>
+                <div class="col">
+                    <%= office.reviews.order(release_date: :desc).first.reason_for_choosing_office %>
+                </div>
+            </div>
+        <% end %>
+    </div>
 <% end %>
