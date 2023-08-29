@@ -30,11 +30,10 @@ class AssessmentRequestsController < ApplicationController
     ]
   end
 
-  def done; end
 
   def create
     # @assessment_request = AssessmentRequest.new(params[:assessment_request])
-    render 'done', status: :ok
+    redirect_to assessment_requests_thanks
   end
 
   private
