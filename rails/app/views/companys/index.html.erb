@@ -10,34 +10,11 @@
         </div>
         <div class="row ">
             <div class="col d-flex justify-content-center">
-                <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.js"></script>
-                <div style="position:relative;width:50%;"><canvas id="myChart" %></canvas>
-                <script>
-                    var ctx = document.getElementById("myChart");
-                    var myChart = new Chart(ctx, {
-                        type: 'radar',
-                        data: {
-                            labels: ["対応満足度", "売却スピード","売却価格"],
-                            datasets: [{
-                                label: "<%= j @company_name %>",
-                                data: [<%= @average_satisfaction%>, <%= @average_contract_price_satisfaction %>, <%= @average_sales_speed_satisfaction%>],
-                                backgroundColor: "rgba(67, 133, 215, 0.5)",  //グラフ背景色
-                                borderColor: "rgba(67, 133, 215, 1)",        //グラフボーダー色
-                            }]
-                        },
-                        options: {
-                            scales: {
-                                r: {
-                                    max: 5,        //グラフの最大値
-                                    min: 0,        //グラフの最小値
-                                    ticks: {
-                                        stepSize: 1  //目盛間隔
-                                    }
-                                }
-                            },
-                        }
-                    });
-                </script></div>
+                <div data-controller="barchart">
+  <canvas id="bar-chart" data-barchart-target="myChart" width="800" height="450"></canvas>
+</div>
+                    <%# <%= javascript_path 'chart_script' %>
+                </div>
 
             </div>
             <div class="col">
