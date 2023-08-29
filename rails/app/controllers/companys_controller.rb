@@ -24,7 +24,7 @@ class CompanysController < ApplicationController
       labels: ["対応満足度", "売却スピード","売却価格"],
       datasets: [{
           label: @company.name,
-          data: [2,3,4],
+          data: [ @average_satisfaction,@average_contract_price_satisfaction,@average_sales_speed_satisfaction],
           backgroundColor: "rgba(67, 133, 215, 0.5)",  #グラフ背景色
           borderColor: "rgba(67, 133, 215, 1)",        #グラフボーダー色
       }]
