@@ -94,13 +94,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
     t.integer "ieul_id", null: false
     t.integer "ieul_office_id", null: false
     t.string "user_name", null: false
-    t.integer "user_sex", null: false
+    t.string "user_sex", null: false
     t.integer "user_age", null: false
     t.integer "prefecture_id", null: false
     t.bigint "city_id", null: false
     t.string "address", null: false
     t.string "property_type", null: false
-    t.integer "number_of_sales", null: false
+    t.string "number_of_sales", null: false
     t.date "sale_consideration_date", null: false
     t.date "assessment_request_date", null: false
     t.date "selling_date", null: false
