@@ -8,7 +8,7 @@ class CompanysController < ApplicationController
     @company = Company.find(Office.find(params[:ieul_office_id]).ieul_id)
     @reviews = @office.reviews.order(release_date: :desc).limit(5)
 
-    @average_satisfaction = @reviews.sum(:contract_price_satisfaction)/ @reviews.length.to_f
+    @average_satisfaction = @reviews.sum(:contract_price_satisfaction) / @reviews.length.to_f
     @average_contract_price_satisfaction = @reviews.sum(:contract_price_satisfaction) / @reviews.length.to_f
     @average_sales_speed_satisfaction = @reviews.sum(:sales_speed_satisfaction) / @reviews.length.to_f
 
