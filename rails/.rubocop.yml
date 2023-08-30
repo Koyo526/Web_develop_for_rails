@@ -5,7 +5,7 @@ require:
 
 AllCops:
   NewCops: enable
-  TargetRubyVersion: 3.1
+  TargetRubyVersion: 3.0
   TargetRailsVersion: 7.0
   Exclude:
     - bin/**
@@ -31,4 +31,3 @@ Metrics/BlockLength:
 
 Rails/BulkChangeTable:
   Enabled: false
-

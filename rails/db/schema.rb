@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
   create_table "assessable_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "office_id", null: false, comment: "企業ID"
     t.bigint "city_id", null: false, comment: "市区町村ID"
@@ -35,9 +35,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
     t.integer "property_room_plan"
     t.integer "property_constructed_year"
     t.string "user_email"
-    t.string "user_name"
-    t.string "user_name_kana"
     t.string "user_tel"
+    t.string "user_lastname_kana", comment: "ふりがな 性（氏名別の入力form）"
+    t.string "user_firstname_kana", comment: "ふりがな 名（氏名別の入力form）"
+    t.string "user_lastname", comment: "お名前 性（氏名別の入力form）"
+    t.string "user_firstname", comment: "お名前 名（氏名別の入力form）"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_assessment_requests_on_city_id"
