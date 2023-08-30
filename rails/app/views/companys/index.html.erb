@@ -1,6 +1,6 @@
 <% if @office %>
     <% if @office.reviews.order(release_date: :desc).first %>
-        <h1><%= @company_name %>・<%= @office.name %></h1>
+        <h1><%= @company.name %>・<%= @office.name %></h1>
         <div class="row my-3">
             <div class="col">
                 <div><%= @office.catch_copy %></div>
@@ -20,8 +20,8 @@
             </div>
 
             <div class="col">
-                <div><strong><%= @company_name %>について</strong></div>
-                <div>企業名：<%= @company_name%></div>
+                <div><strong><%= @company.name %>について</strong></div>
+                <div>企業名：<%= @company.name%></div>
                 <div>郵便番号：<%= @office.post_number %></div>
                 <div>住所：<%= @office.address %></div>
                 <div>電話番号：<%= @office.phone_number%></div>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div>
-            <div><strong><%= @company_name %>で売却したひとの不動産会社についての口コミ（平均評価★<%= @average_satisfaction %>）</strong></div>
+            <div><strong><%= @company.name %>で売却したひとの不動産会社についての口コミ（平均評価★<%= @average_satisfaction %>）</strong></div>
             <%= render 'shared/review_card' %>
         </div>
     <% end %>
