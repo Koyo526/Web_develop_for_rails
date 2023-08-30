@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AssessmentRequest < ApplicationRecord
+
   validates :branch_id, presence: true
   validates :property_city, presence: true
   validates :property_address, presence: true
@@ -17,12 +18,21 @@ class AssessmentRequest < ApplicationRecord
                          length: { maximum: 100 },
                          format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
-  validates :user_name, presence: true,
+  validates :user_firstname, presence: true,
                         format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
                                   message: I18n.t('activerecord.errors.models.assessment_request.
                                     attributes.some_attribute.invalid_format') }
 
-  validates :user_name_kana, presence: true,
+  validates :user_lastname, presence: true,
+                        format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
+                                  message: I18n.t('activerecord.errors.models.assessment_request.
+                                    attributes.some_attribute.invalid_format') }
+
+  validates :user_firstname_kana, presence: true,
+                             format: { with: /\A[\p{Katakana}ー\s]+\z/,
+                                       message: I18n.t('activerecord.errors.models.assessment_request.
+                                        attributes.some_attribute.invalid_format') }
+  validates :user_lastname_kana, presence: true,
                              format: { with: /\A[\p{Katakana}ー\s]+\z/,
                                        message: I18n.t('activerecord.errors.models.assessment_request.
                                         attributes.some_attribute.invalid_format') }
