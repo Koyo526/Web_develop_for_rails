@@ -1,6 +1,6 @@
 <% if office.reviews.order(release_date: :desc).first %>
     <div class="border">
-        <%= link_to "/companys/index", class: "a-company" do %>
+        <%= link_to companys_path(office.id), class: "a-company" do %>
             <div class="row my-3">
                 <div class="col-lg-2">
                     <div><%= office.company.name %></div>
