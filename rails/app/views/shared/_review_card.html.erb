@@ -1,0 +1,11 @@
+<% @reviews.each do |review| %>
+    <div class="border my-3">
+        <%= link_to reviews_path(id: review.id), class: "a-company" do %>
+            <div><strong><%=  review.headline %>：★<%= review.contract_price_satisfaction %></strong></div>
+            <div><%= review.reason_for_support_satiosfaction %></div>
+            <div class=" offset-lg-7">
+                成約価格 <%= review.contract_price %>（<%= review.city.name %>・<%= review.sale_date%>に売却）
+            </div>
+        <% end %>
+    </div>
+<% end %>

@@ -22,8 +22,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
   end
 
   create_table "assessment_requests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "branch_id"
-    t.integer "property_city"
+    t.bigint "office_id"
+    t.bigint "city_id"
     t.string "property_address"
     t.integer "property_type"
     t.float "property_exclusive_area"
@@ -42,6 +42,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
     t.string "user_firstname", comment: "お名前 名（氏名別の入力form）"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_assessment_requests_on_city_id"
+    t.index ["office_id"], name: "index_assessment_requests_on_office_id"
   end
 
   create_table "cities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
