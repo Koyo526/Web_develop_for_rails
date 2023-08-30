@@ -1,4 +1,7 @@
-<h1>都道府県/市区町村の不動産会社</h1>
+<h1><%= @city.prefecture.name %><%= @city.name %>の不動産会社</h1>
 <% @offices.each do |office| %>
   <%= render 'shared/company_card', office: office %>
-<% end %>
+  <% end %>
+  <% @cities_without_target_city.each do |cities| %>
+    <%=link_to cities.name, prefecture_path(@city.prefecture.id, cities.id)  %>
+  <% end %>
