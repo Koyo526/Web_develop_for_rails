@@ -7,6 +7,8 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# rubocop:disable Rails/SkipsModelValidations
+
 require 'csv'
 
 CSV.foreach('db/csv/companies_master.csv', encoding: 'UTF-8').each_slice(500) do |rows|
@@ -81,3 +83,4 @@ CSV.foreach('db/csv/reviews_master.csv', encoding: 'UTF-8').each_slice(1000) do 
   end
   Review.insert_all(review_attrs)
 end
+# rubocop:enable  Rails/SkipsModelValidations
