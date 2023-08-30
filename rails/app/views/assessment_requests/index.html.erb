@@ -2,64 +2,79 @@
 
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= form_with(url: '/assessment_requests',method: :post,scope: :assessment_request) do |f| %>
+      <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+      <% end %>
+      
+      <%= form_with(model: @assessment_request) do |f| %>
+        <% if @assessment_request.errors.any? %>
+          <div id="error_explanation">
+            <div class="alert alert-danger">
+              The form contains <%= pluralize(@assessment_request.errors.count, "error") %>.
+            </div>
+            <ul>
+            <% @assessment_request.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div>
+          <%= f.label :user_name , "お名前" %>
+          <%= f.text_field :user_lastname, class: 'form-control' %>
+          <%= f.text_field :user_firstname, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :user_name_kana , "フリガナ" %>
+          <%= f.text_field :user_lastname_kana, class: 'form-control' %>
+          <%= f.text_field :user_firstname_kana, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :user_tel, "電話番号" %>
+          <%= f.text_field :user_tel, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :user_email , "メールアドレス" %>
+          <%= f.email_field :user_email, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :property_constructed_year , "築年数" %>
+          <%= f.number_field :property_constructed_year, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :property_room_plan , "間取り" %>
+          <%= f.select :uproperty_room_plan, select_room_plan, {include_blank: "選択してください"}, class: 'form-control' %> 
 
-      <div>
-        <%= f.label :user_name , "お名前" %>
-        <%= f.text_field :user_lastname, class: 'form-control' %>
-        <%= f.text_field :user_firstname, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :user_name_kana , "フリガナ" %>
-        <%= f.text_field :user_lastname_kana, class: 'form-control' %>
-        <%= f.text_field :user_firstname_kana, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :user_tel, "電話番号" %>
-        <%= f.text_field :user_tel, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :user_email , "メールアドレス" %>
-        <%= f.email_field :user_email, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :property_constructed_year , "築年数" %>
-        <%= f.text_field :property_constructed_year, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :property_room_plan , "間取り" %>
-        <%= f.select :uproperty_room_plan, @select_room_plan, {include_blank: "選択してください"}, class: 'form-control' %> 
+        </div>
+        <div>
+          <%= f.label :property_floor_area , "延床面積" %>
+          <%= f.text_field :property_floor_area, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :property_building_area_unit , "建物面積単位" %>
+          <%= f.select :property_building_area_unit, select_building_area, {include_blank: "選択してください"}, class: 'form-control' %> 
 
-      </div>
-      <div>
-        <%= f.label :property_floor_area , "延床面積" %>
-        <%= f.text_field :property_floor_area, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :property_building_area_unit , "建物面積単位" %>
-        <%= f.select :property_building_area_unit, @select_building_area, {include_blank: "選択してください"}, class: 'form-control' %> 
+        </div>
+        <div>
+          <%= f.label :property_building_area_float, "建物面積" %>
+          <%= f.text_field :property_building_area_float, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :property_land_area, "土地面積" %>
+          <%= f.text_field :property_land_area, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :property_exclusive_area , "専有面積" %>
+          <%= f.text_field :property_exclusive_area , class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.label :property_type , "物件種別" %>
+          <%= f.select :property_type, select_type, {include_blank: "選択してください"}, class: 'form-control' %> 
 
-      </div>
-      <div>
-        <%= f.label :property_building_area, "建物面積" %>
-        <%= f.text_field :property_building_area, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :property_land_area, "土地面積" %>
-        <%= f.text_field :property_land_area, class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :property_exclusive_area , "専有面積" %>
-        <%= f.text_field :property_exclusive_area , class: 'form-control' %>
-      </div>
-      <div>
-        <%= f.label :property_type , "物件種別" %>
-        <%= f.select :property_type, @select_type, {include_blank: "選択してください"}, class: 'form-control' %> 
-
-      </div>
-      <div class="my-3">
-        <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control' %>
-      </div>
+        </div>
+        <div class="my-3">
+          <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control' %>
+        </div>
 
       <% end %>
       <div class="my-3">
