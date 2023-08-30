@@ -51,11 +51,6 @@
           <%= f.text_field :property_floor_area, class: 'form-control' %>
         </div>
         <div>
-          <%= f.label :property_building_area_unit , "建物面積単位" %>
-          <%= f.select :property_building_area_unit, select_building_area, {include_blank: "選択してください"}, class: 'form-control' %> 
-
-        </div>
-        <div>
           <%= f.label :property_building_area_float, "建物面積" %>
           <%= f.text_field :property_building_area_float, class: 'form-control' %>
         </div>
@@ -69,7 +64,7 @@
         </div>
         <div>
           <%= f.label :property_type , "物件種別" %>
-          <%= f.select :property_type, select_type, {include_blank: "選択してください"}, class: 'form-control' %> 
+          <%= f.select :property_type, select_property_type, {include_blank: "選択してください"}, class: 'form-control' %> 
 
         </div>
         <div class="my-3">
