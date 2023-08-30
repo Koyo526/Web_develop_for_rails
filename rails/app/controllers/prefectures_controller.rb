@@ -2,7 +2,7 @@
 
 class PrefecturesController < ApplicationController
   def index
-    @offices = Office.joins(:assessable_cities).where(assessable_cities: { id: params[:city_id]}) #Office.find_by(Office.company_id.assessable_areas: params[:city_id])
+    @offices = Office.joins(:assessable_cities).where(assessable_cities: { id: params[:city_id] }) # Office.find_by(Office.company_id.assessable_areas: params[:city_id])
     puts params[:city_id]
     puts @offices
 
