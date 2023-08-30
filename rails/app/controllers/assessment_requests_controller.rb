@@ -8,9 +8,7 @@ class AssessmentRequestsController < ApplicationController
   def create
     @assessment_request = AssessmentRequest.new(assessment_params)
 
-    if @assessment_request.save
-      redirect_to assessment_requests_thanks
-    end
+    redirect_to assessment_requests_thanks if @assessment_request.save
 
     render 'index', status: :unprocessable_entity
   end
@@ -30,6 +28,7 @@ class AssessmentRequestsController < ApplicationController
       :property_building_area,
       :property_land_area,
       :property_exclusive_area,
-      :property_type)
+      :property_type
+    )
   end
 end

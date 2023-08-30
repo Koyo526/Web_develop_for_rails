@@ -19,6 +19,10 @@ Rails:
 
 Style/Documentation:
   Enabled: false
+  
+# Ruby3.1以降で追加された記法のため無効化
+Style/HashSyntax:
+  Enabled: false
 
 Metrics/MethodLength:
   Enabled: false
@@ -31,4 +35,3 @@ Metrics/BlockLength:
 
 Rails/BulkChangeTable:
   Enabled: false
-
