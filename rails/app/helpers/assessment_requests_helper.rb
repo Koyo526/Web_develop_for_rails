@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AssessmentRequestsHelper
-    def select_room_plan 
+    def select_property_type
         [
             ['分譲マンション', 1],
             ['一戸建て', 2],
@@ -9,7 +9,7 @@ module AssessmentRequestsHelper
         ]
     end
   
-    def select_type 
+    def select_room_plan
         [
             ['1R(ワンルーム)', 1],
             ['1K / 1DK', 2],
