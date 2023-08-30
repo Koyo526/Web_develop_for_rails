@@ -9,15 +9,7 @@ class AssessmentRequestsController < ApplicationController
     @assessment_request = AssessmentRequest.new(assessment_params)
 
     if @assessment_request.save
-      ieul_api_client = Assessment::Request::IeulApiClient.new
-      res = ieul_api_client.post(@assessment_request.attributes)
-      if res.code == "200"
-        redirect_to assessment_requests_thanks
-        
-        flash[:danger] = 'failed to post missiong'
-      end
-    else
-      flash.now[:danger] = 'failed validation'
+      redirect_to assessment_requests_thanks
     end
 
     render 'index', status: :unprocessable_entity
@@ -35,8 +27,6 @@ class AssessmentRequestsController < ApplicationController
       :user_email,
       :property_constructed_year,
       :property_room_plan,
-      :property_floor_area,
-      :property_building_area_unit,
       :property_building_area,
       :property_land_area,
       :property_exclusive_area,
