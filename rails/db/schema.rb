@@ -9,7 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
-ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
   create_table "assessable_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "office_id", null: false, comment: "企業ID"
     t.bigint "city_id", null: false, comment: "市区町村ID"
@@ -21,8 +21,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
   end
 
   create_table "assessment_requests", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "branch_id"
-    t.integer "property_city"
+    t.bigint "office_id"
+    t.bigint "city_id"
     t.string "property_address"
     t.integer "property_type"
     t.float "property_exclusive_area"
@@ -34,11 +34,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
     t.integer "property_room_plan"
     t.integer "property_constructed_year"
     t.string "user_email"
-    t.string "user_name"
-    t.string "user_name_kana"
     t.string "user_tel"
+    t.string "user_lastname_kana", comment: "ふりがな 性（氏名別の入力form）"
+    t.string "user_firstname_kana", comment: "ふりがな 名（氏名別の入力form）"
+    t.string "user_lastname", comment: "お名前 性（氏名別の入力form）"
+    t.string "user_firstname", comment: "お名前 名（氏名別の入力form）"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_assessment_requests_on_city_id"
+    t.index ["office_id"], name: "index_assessment_requests_on_office_id"
   end
 
   create_table "cities", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
@@ -85,55 +89,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "questionnaire_answers", primary_key: "review_id", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "send_target_users_id", null: false
-    t.integer "ieul_id"
-    t.integer "ieul_offic_id"
-    t.string "user_name"
-    t.integer "user_sex"
-    t.integer "user_age"
-    t.integer "property_id"
-    t.integer "prefecture_id"
-    t.integer "city_id"
-    t.string "addres"
-    t.string "property_type"
-    t.date "assessment_request_data"
-    t.date "selling_date"
-    t.date "sale_date"
-    t.date "release_date"
-    t.integer "assessment_price"
-    t.integer "selling_price"
-    t.boolean "is_discounted", default: false, null: false
-    t.integer "months_to_discount"
-    t.integer "discount_price"
-    t.integer "contrace_price"
-    t.integer "intermediary_agreement_type"
-    t.string "headline"
-    t.integer "reason_for_sale"
-    t.text "concern_for_sale"
-    t.text "reason_for_choosing_office"
-    t.integer "support_satisfaceion"
-    t.text "reason_for_support_satisfaction"
-    t.text "advise"
-    t.text "improvement_point"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["send_target_users_id"], name: "index_questionnaire_answers_on_send_target_users_id"
-  end
-
   create_table "reviews", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "user_id", null: false
     t.bigint "office_id", null: false
     t.integer "ieul_id", null: false
     t.integer "ieul_office_id", null: false
     t.string "user_name", null: false
-    t.integer "user_sex", null: false
+    t.string "user_sex", null: false
     t.integer "user_age", null: false
     t.integer "prefecture_id", null: false
     t.bigint "city_id", null: false
     t.string "address", null: false
     t.string "property_type", null: false
-    t.integer "number_of_sales", null: false
+    t.string "number_of_sales", null: false
     t.date "sale_consideration_date", null: false
     t.date "assessment_request_date", null: false
     t.date "selling_date", null: false
@@ -178,7 +146,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
     t.datetime "updated_at", null: false
     t.index ["send_target_users_id"], name: "index_sent_emails_on_send_target_users_id"
   end
-
   add_foreign_key "assessable_areas", "cities"
   add_foreign_key "assessable_areas", "offices"
   add_foreign_key "assessable_areas", "cities"
@@ -186,8 +153,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_28_014451) do
   add_foreign_key "cities", "prefectures"
   add_foreign_key "offices", "cities"
   add_foreign_key "offices", "companies"
-  add_foreign_key "questionnaire_answers", "send_target_users", column: "send_target_users_id"
   add_foreign_key "reviews", "cities"
   add_foreign_key "reviews", "offices"
-  add_foreign_key "sent_emails", "send_target_users", column: "send_target_users_id"
 end

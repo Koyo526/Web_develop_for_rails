@@ -2,40 +2,33 @@
 
 class AssessmentRequestsController < ApplicationController
   def index
-    @select_room_plan = [
-      ['分譲マンション', 1],
-      ['一戸建て', 2],
-      ['土地', 3]
-    ]
-
-    @select_building_area = [
-      ['1R(ワンルーム)', 1],
-      ['1K / 1DK', 2],
-      ['1LK / 1LDK', 3],
-      ['2K / 2DK', 4],
-      ['2LK / 2LDK', 5],
-      ['3K / 3DK', 6],
-      ['3LK / 3LDK', 7],
-      ['4K / 4DK', 8],
-      ['4LK / 4LDK', 9],
-      ['5K / 5DK', 10],
-      ['5LK / 5LDK', 11],
-      ['6K / 6DK', 12],
-      ['6LK / 6LDK以上', 13]
-    ]
-
-    @select_type = [
-      ['平方メートル', 1],
-      ['坪', 2]
-    ]
+    @assessment_request = AssessmentRequest.new
   end
 
   def create
-    # @assessment_request = AssessmentRequest.new(params[:assessment_request])
-    redirect_to assessment_requests_thanks
+    @assessment_request = AssessmentRequest.new(assessment_params)
+
+    redirect_to assessment_requests_thanks if @assessment_request.save
+
+    render 'index', status: :unprocessable_entity
   end
 
   private
 
-  def assessment_params; end
+  def assessment_params
+    params.require(:assessment_request).permit(
+      :user_lastname,
+      :user_firstname,
+      :user_lastname_kana,
+      :user_firstname_kana,
+      :user_tel,
+      :user_email,
+      :property_constructed_year,
+      :property_room_plan,
+      :property_building_area,
+      :property_land_area,
+      :property_exclusive_area,
+      :property_type
+    )
+  end
 end
