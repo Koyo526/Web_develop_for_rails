@@ -10,8 +10,8 @@ class AssessmentRequestsController < ApplicationController
 
     if @assessment_request.save
       ieul_api_client = Assessment::Request::IeulApiClient.new
-      ref = ieul_api_client.post(@assessment_request.attributes)
-      if ref.msg == 'OK'
+      res = ieul_api_client.post(@assessment_request.attributes)
+      if res.msg == 'OK'
         redirect_to thanks_path
       else
         render 'index', status: :unprocessable_entity
