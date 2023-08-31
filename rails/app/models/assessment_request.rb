@@ -57,25 +57,40 @@ class AssessmentRequest
                          length: { maximum: 100 },
                          format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
 
-  validates :user_firstname, presence: true,
-                             format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
-                                       message: I18n.t('activerecord.errors.models.assessment_request.attributes.user_firstname.invalid_format') }
+  validates :user_firstname,
+            presence: true,
+            format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
+                      message: I18n.t(
+                        'activerecord.errors.models.assessment_request.attributes.user_firstname.invalid_format'
+                      ) }
 
-  validates :user_lastname, presence: true,
-                            format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
-                                      message: I18n.t('activerecord.errors.models.assessment_request.attributes.user_lastname.invalid_format') }
+  validates :user_lastname,
+            presence: true,
+            format: { with: /\A[\p{Han}\p{Katakana}\p{Hiragana}ー\s]+\z/,
+                      message: I18n.t(
+                        'activerecord.errors.models.assessment_request.attributes.user_lastname.invalid_format'
+                      ) }
 
-  validates :user_firstname_kana, presence: true,
-                                  format: { with: /\A[\p{Katakana}ー\s]+\z/,
-                                            message: I18n.t('activerecord.errors.models.assessment_request.attributes.user_firstname_kana.invalid_format') }
-  validates :user_lastname_kana, presence: true,
-                                 format: { with: /\A[\p{Katakana}ー\s]+\z/,
-                                           message: I18n.t('activerecord.errors.models.assessment_request.attributes.user_lastname_kana.invalid_format') }
-  validates :user_tel, presence: true,
-                       numericality: { only_integer: true },
-                       length: { in: 10..11 },
-                       format: { with: /\A0\d{9,10}\z/,
-                                 message: I18n.t('activerecord.errors.models.assessment_request.attributes.user_tel.invalid_format') }
+  validates :user_firstname_kana,
+            presence: true,
+            format: { with: /\A[\p{Katakana}ー\s]+\z/,
+                      message: I18n.t(
+                        'activerecord.errors.models.assessment_request.attributes.user_firstname_kana.invalid_format'
+                      ) }
+  validates :user_lastname_kana,
+            presence: true,
+            format: { with: /\A[\p{Katakana}ー\s]+\z/,
+                      message: I18n.t(
+                        'activerecord.errors.models.assessment_request.attributes.user_lastname_kana.invalid_format'
+                      ) }
+  validates :user_tel,
+            presence: true,
+            numericality: { only_integer: true },
+            length: { in: 10..11 },
+            format: { with: /\A0\d{9,10}\z/,
+                      message: I18n.t(
+                        'activerecord.errors.models.assessment_request.attributes.user_tel.invalid_format'
+                      ) }
 
   def save
     if invalid?
