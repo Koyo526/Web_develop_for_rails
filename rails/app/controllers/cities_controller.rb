@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class PrefecturesController < ApplicationController
+class CitiesController < ApplicationController
   def index
     @offices = Office.includes(:reviews).includes(:assessable_cities).where(assessable_cities: { id: params[:city_id] })
                      .all.page(params[:page]).per(5)

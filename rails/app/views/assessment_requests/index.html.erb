@@ -1,5 +1,6 @@
 <% content_for :title, "査定依頼フォーム" %>
 <% content_for :description, "査定依頼を送ることができます" %>
+
 <h1 class="text-center">査定依頼フォーム</h1>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
@@ -21,8 +22,7 @@
           </div>
         <% end %>
           <%= f.hidden_field :branch_id, value: params[:branch_id] %>
-          <%= f.hidden_field :property_city, value: params[:property_city] %>
-        <div class='row'>
+        <div class='row mt-5'>
           <%= f.label :user_name , "お名前" %>
           <div class='col'>
             <%= f.text_field :user_lastname, class: 'form-control',placeholder: '姓' %>
@@ -31,7 +31,7 @@
             <%= f.text_field :user_firstname, class: 'form-control',placeholder: '名' %>
           </div>
         </div>
-        <div class='row'>
+        <div class='row mt-5'>
           <%= f.label :user_name_kana , "フリガナ" %>
           <div class='col'>
             <%= f.text_field :user_lastname_kana, class: 'form-control',placeholder: '姓　カナ' %>
@@ -40,51 +40,55 @@
             <%= f.text_field :user_firstname_kana, class: 'form-control',placeholder: '名　カナ' %>
           </div>
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :user_tel, "電話番号" %>
           <%= f.text_field :user_tel, class: 'form-control',placeholder: '08012345678' %>
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :user_email , "メールアドレス" %>
           <%= f.email_field :user_email, class: 'form-control',placeholder: 'example@example.com' %>
         </div>
-        <div>
-          <%= f.label :property_address , "住所" %>
+        <div class='col mt-5'>
+          <%= f.label :property_address , "市区町村" %>
+          <%= f.select :uproperty_room_plan, @assessable_areas, {include_blank: "選択してください"}, class: 'form-control' %> 
+        </div>
+        <div class='col mt-5'>
+          <%= f.label :property_address , "査定依頼をする住所" %>
           <%= f.text_field :property_address , class: 'form-control',placeholder: '東京都' %>
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :property_constructed_year , "築年数" %>
           <%= f.number_field :property_constructed_year, class: 'form-control',placeholder: '10' %>
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :property_room_plan , "間取り" %>
           <%= f.select :uproperty_room_plan, select_room_plan, {include_blank: "選択してください"}, class: 'form-control' %> 
 
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :property_type , "物件種別" %>
           <%= f.select :property_type, select_property_type, {include_blank: "選択してください"}, class: 'form-control' %> 
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :property_building_area_float, "建物面積（㎡）" %>
           <%= f.text_field :property_building_area_float, class: 'form-control',placeholder: '戸建ての場合必須' %>
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :property_land_area, "土地面積（㎡）" %>
           <%= f.text_field :property_land_area, class: 'form-control',placeholder: '戸建て・土地の場合必須' %>
         </div>
-        <div>
+        <div class='col mt-5'>
           <%= f.label :property_exclusive_area , "専有面積（㎡）" %>
           <%= f.text_field :property_exclusive_area , class: 'form-control',placeholder: 'マンションの場合必須' %>
         </div>
-        <div class="my-3">
-          <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control mx-auto mt-5' %>
+        <div class="my-3 w-25 mx-auto">
+          <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control mt-5' %>
         </div>
 
       <% end %>
-      <div class="my-3">
-        <%= link_to '戻る', "/", class: 'btn btn-secondary form-control ' %>
+      <div class="my-3 w-25 mx-auto">
+        <%= link_to '戻る', "/", class: 'btn btn-secondary form-control pull-center' %>
       </div>
   
-    </div>
+
   </div>
