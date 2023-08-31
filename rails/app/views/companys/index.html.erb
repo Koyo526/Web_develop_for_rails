@@ -1,3 +1,5 @@
+<% content_for :title, "企業口コミページ" %>
+<% content_for :description, "不動産会社の情報を見ることができます" %>
 <% if @office %>
     <% if @office.reviews.order(release_date: :desc).first %>
         <h1><%= @company.name %>・<%= @office.name %></h1>
