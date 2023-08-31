@@ -4,8 +4,8 @@ class CompanysController < ApplicationController
   def index
     return unless params[:ieul_office_id]
 
-    @office = Office.find(params[:ieul_office_id])
-    @company = Company.find(Office.find(params[:ieul_office_id]).ieul_id)
+    @office = Office.includes(:reviews).find(params[:ieul_office_id])
+    @company = Company.find(@office.ieul_id)
     @reviews = @office.reviews.order(release_date: :desc).limit(5)
 
     @average_satisfaction = @reviews.sum(:contract_price_satisfaction) / @reviews.length.to_f
