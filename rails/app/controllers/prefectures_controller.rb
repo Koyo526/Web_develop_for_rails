@@ -8,6 +8,5 @@ class PrefecturesController < ApplicationController
     Rails.logger.debug @offices
     @city = City.find(params[:city_id])
     @cities_without_target_city = @city.prefecture.cities.reject { |city| city == @city }
-
   end
 end
