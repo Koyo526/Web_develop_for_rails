@@ -2,7 +2,7 @@
 <% content_for :description, "不動産会社の情報を見ることができます" %>
 <% if @office %>
     <% if @office.reviews.order(release_date: :desc).first %>
-        <h1><%= @company.name %>・<%= @office.name %></h1>
+        <h1><%= @company.name %>・<%= @office.name.present? ? @office.name : "本店" %></h1>
         <div class="row my-3">
             <div class="col">
                 <div><%= @office.catch_copy %></div>
