@@ -17,4 +17,18 @@
     text-decoration: none;
     color: black;
 }
+<<<<<<< HEAD
 
+=======
+/*ページネーション自体のデザイン*/
+.pagination>a {          
+    border: none;     /*枠線をなくす*/
+    color: #696969;   /*文字の色を変える*/
+  }
+  
+  /* 表示しているページ番号のデザイン */
+  .pagination>.active>a {     
+    background: #93c9ff;     /*背景の色を変える*/
+  }
+  
+>>>>>>> main
