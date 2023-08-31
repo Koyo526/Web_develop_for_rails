@@ -16,11 +16,7 @@
   <div class="row">
 <% @cities_without_target_city.each do |city| %>
       <div class="col-md-2 mb-1">
-        <%=link_to city.name, cities_path(@city.prefecture.id, city.id)  %>          </div>
+        <%=link_to city.name, prefecture_path(@city.prefecture.id, city.id)  %>          </div>
 <% end %>
-
   </div>
 </div>
-
-
-

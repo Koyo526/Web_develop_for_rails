@@ -28,4 +28,10 @@
   .pagination>.active>a {     
     background: #93c9ff;     /*背景の色を変える*/
   }
+  .pagination li {
+    display:inline-block;
+    width: 100%; /* 可能な限り最大で表示 */
+    text-align: center;
+  }
+  
   

@@ -2,7 +2,7 @@
 
 class CitiesController < ApplicationController
   def index
-    @offices = Office.joins(:assessable_cities).where(assessable_cities: { id: params[:city_id] })
+    @offices = Office.includes(:reviews).includes(:assessable_cities).where(assessable_cities: { id: params[:city_id] })
                      .all.page(params[:page]).per(5)
     Rails.logger.debug params[:city_id]
     Rails.logger.debug @offices
