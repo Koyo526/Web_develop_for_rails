@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = 'http://www.example.com'
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
@@ -29,11 +31,9 @@ SitemapGenerator::Sitemap.create do
   # エリアページ を追加する
   Office.find_each do |city_id|
     add prefecture_path(1, city_id), priority: 0.7, changefreq: 'daily'
-  end
-  # 企業ページ を追加する
-  Office.find_each do |companys_id|
     add companys_path(companys_id), priority: 0.7, changefreq: 'daily', lastmod: companys_id.updated_at
   end
+  # 企業ページ を追加する
   # 口コミ詳細ページ を追加する
   Review.find_each do |id|
     add review_path(id), priority: 0.7, changefreq: 'daily'
