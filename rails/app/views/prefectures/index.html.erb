@@ -4,19 +4,18 @@
 <% @offices.each do |office| %>
   <%= render 'shared/company_card', office: office %>
 <% end %>
-<div class="border border-2 border-gray rounded-3 ">
-<div class="container mt-3">
+<div class="container mt-3 mb-3 border border-2 border-gray rounded-3 ">
   <div>
-    <p class="border-bottom border-dark secondary"><%= @city.prefecture.name%>全域</p>
+    <p class="border-bottom border-dark secondary mt-3"><%= @city.prefecture.name%>全域</p>
   </div>
   <div class="row">
     <% @cities_without_target_city.each do |cities| %>
-      <div class="col-md-2">
+      <div class="col-md-2 mb-1">
         <%=link_to cities.name, prefecture_path(@city.prefecture.id, cities.id)  %>
       </div>
     <% end %>
   </div>
 </div>
-</div>
+
 
 
