@@ -9,6 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
+
 ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
   create_table "assessable_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "office_id", null: false, comment: "企業ID"
@@ -146,8 +147,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
     t.datetime "updated_at", null: false
     t.index ["send_target_users_id"], name: "index_sent_emails_on_send_target_users_id"
   end
-  add_foreign_key "assessable_areas", "cities"
-  add_foreign_key "assessable_areas", "offices"
+
   add_foreign_key "assessable_areas", "cities"
   add_foreign_key "assessable_areas", "offices"
   add_foreign_key "cities", "prefectures"
