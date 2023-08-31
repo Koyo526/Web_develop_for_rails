@@ -4,6 +4,7 @@
 <% @offices.each do |office| %>
   <%= render 'shared/company_card', office: office %>
 <% end %>
+<%= paginate @offices, theme: 'bootstrap-5'%>
 <% @cities_without_target_city.each do |cities| %>
   <%=link_to cities.name, prefecture_path(@city.prefecture.id, cities.id)  %>
 <% end %>
