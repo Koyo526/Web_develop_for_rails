@@ -28,9 +28,9 @@ SitemapGenerator::Sitemap.create do
   #   end
 
   # エリアページ を追加する
-  Office.find_each do |city_id|
-    add prefecture_path(1, city_id), priority: 0.7, changefreq: 'daily'
-    add companys_path(companys_id), priority: 0.7, changefreq: 'daily', lastmod: companys_id.updated_at
+  Office.find_each do |office|
+    add prefecture_path(office.city.prefecture_id, office.city.id), priority: 0.7, changefreq: 'daily'
+    add companys_path(office.id), priority: 0.7, changefreq: 'daily'
   end
   # 企業ページ を追加する
   # 口コミ詳細ページ を追加する
