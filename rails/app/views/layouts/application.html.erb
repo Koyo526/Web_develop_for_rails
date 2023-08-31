@@ -8,6 +8,11 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <% if yield(:is_noindex).present? %>
+        <meta name="robots" content="noindex">
+    <% end  %>
+
   </head>
 
   <body>
