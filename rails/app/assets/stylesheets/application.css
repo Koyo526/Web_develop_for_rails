@@ -17,6 +17,7 @@
     text-decoration: none;
     color: black;
 }
+
 /*ページネーション自体のデザイン*/
 .pagination>a {          
     border: none;     /*枠線をなくす*/
