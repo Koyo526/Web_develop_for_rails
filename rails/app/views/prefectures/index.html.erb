@@ -6,7 +6,21 @@
 <% @offices.each do |office| %>
   <%= render 'shared/company_card', office: office %>
 <% end %>
-<%= paginate @offices, theme: 'bootstrap-5'%>
-<% @cities_without_target_city.each do |cities| %>
-  <%=link_to cities.name, prefecture_path(@city.prefecture.id, cities.id)  %>
+<div class="mx-auto" style="width: 200px">
+  <%= paginate @offices, theme: 'bootstrap-5'%>
+</div>
+<div class="container mt-3 mb-3 border border-2 border-gray rounded-3 ">
+  <div>
+    <p class="border-bottom border-dark secondary mt-3"><%= @city.prefecture.name%>全域</p>
+  </div>
+  <div class="row">
+<% @cities_without_target_city.each do |city| %>
+      <div class="col-md-2 mb-1">
+        <%=link_to city.name, prefecture_path(@city.prefecture.id, city.id)  %>          </div>
 <% end %>
+
+  </div>
+</div>
+
+
+
