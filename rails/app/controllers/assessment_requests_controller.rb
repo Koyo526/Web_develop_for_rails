@@ -8,15 +8,24 @@ class AssessmentRequestsController < ApplicationController
   def create
     @assessment_request = AssessmentRequest.new(assessment_params)
 
-    redirect_to assessment_requests_thanks if @assessment_request.save
+    if @assessment_request.save
+      ieul_api_client = Assessment::Request::IeulApiClient.new
+      ieul_api_client.post(@assessment_request.attributes)
+      
+      redirect_to thanks_path
+    else
+      render 'index', status: :unprocessable_entity
+    end
 
-    render 'index', status: :unprocessable_entity
   end
 
   private
 
   def assessment_params
     params.require(:assessment_request).permit(
+      :branch_id,
+      :property_city,
+      :property_address,
       :user_lastname,
       :user_firstname,
       :user_lastname_kana,

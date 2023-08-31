@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :thanks, only: %i[index]
   end
   get 'assessment_requests/done', to: 'assessment_requests#done'
+  resources :thanks
   mount KomachiHeartbeat::Engine => '/ops'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
