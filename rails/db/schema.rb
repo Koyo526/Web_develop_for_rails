@@ -9,6 +9,7 @@
 # migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
+
 ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
   create_table "assessable_areas", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.bigint "office_id", null: false, comment: "企業ID"
@@ -130,24 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
     t.index ["office_id"], name: "index_reviews_on_office_id"
   end
 
-  create_table "send_target_users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.string "email_address"
-    t.boolean "opt_out", default: false, null: false
-    t.boolean "check_response", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "sent_emails", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.bigint "send_target_users_id", null: false
-    t.string "email_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["send_target_users_id"], name: "index_sent_emails_on_send_target_users_id"
-  end
-  add_foreign_key "assessable_areas", "cities"
-  add_foreign_key "assessable_areas", "offices"
   add_foreign_key "assessable_areas", "cities"
   add_foreign_key "assessable_areas", "offices"
   add_foreign_key "cities", "prefectures"

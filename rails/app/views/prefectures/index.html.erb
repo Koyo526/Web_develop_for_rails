@@ -7,3 +7,4 @@
 <% @cities_without_target_city.each do |cities| %>
   <%=link_to cities.name, prefecture_path(@city.prefecture.id, cities.id)  %>
 <% end %>
+
