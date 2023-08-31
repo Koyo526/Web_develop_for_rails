@@ -28,7 +28,7 @@
 #
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
-
+# https://qiita.com/shimadama/items/7e5c3d75c9a9f51abdd5
 ja:
   views:
     pagination:
@@ -37,7 +37,24 @@ ja:
       previous: "&lsaquo; 前"
       next: "次 &rsaquo;"
       truncate: "..."
-jp:
+  activemodel:
+    attributes:
+      assessment_request:
+        branch_id: "店舗ID"
+        property_city: "市区町村ID"
+        property_address: "住所"
+        user_lastname: "姓"
+        user_firstname: "名"
+        user_lastname_kana: "姓 カナ"
+        user_firstname_kana: "名 カナ"
+        user_tel: "電話番号"
+        user_email: "メールアドレス"
+        property_constructed_year: 築年数
+        property_room_plan: 間取り
+        property_building_area: 査定可能エリア
+        property_land_area: 査定可能エリア
+        property_exclusive_area: 査定可能エリア
+        property_type: 物件種別
   activerecord:
     errors:
       models:
@@ -45,7 +62,11 @@ jp:
           attributes:
             user_tel:
               invalid_format: 'は0で始まる10桁または11桁の数字を入力してください'
-            user_name:
+            user_firstname:
               invalid_format: 'は漢字、ひらがな、カタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です'
-            user_name_kana:
+            user_lastname:
+              invalid_format: 'は漢字、ひらがな、カタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です'
+            user_firstname_kana:
+              invalid_format: 'はカタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です'
+            user_lastname_kana:
               invalid_format: 'はカタカナ、ー（半角ハイフンマイナス）、空白のみ入力可能です'
