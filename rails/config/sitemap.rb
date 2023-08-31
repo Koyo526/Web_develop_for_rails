@@ -1,5 +1,6 @@
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "http://www.example.com"
+SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
 SitemapGenerator::Sitemap.create do
   # Put links creation logic here.
@@ -24,4 +25,19 @@ SitemapGenerator::Sitemap.create do
   #   Article.find_each do |article|
   #     add article_path(article), :lastmod => article.updated_at
   #   end
+
+  # エリアページ を追加する
+  Office.find_each do |city_id|
+    add prefecture_path(1, city_id), :priority => 0.7, :changefreq => 'daily'
+  end
+  # 企業ページ を追加する
+  Office.find_each do |companys_id|
+    add companys_path(companys_id), :priority => 0.7, :changefreq => 'daily', :lastmod => companys_id.updated_at
+  end
+  # 口コミ詳細ページ を追加する
+  Review.find_each do |id|
+    add review_path(id), :priority => 0.7, :changefreq => 'daily'
+  end
+  # 査定依頼ページ を追加する
+  add assessment_requests_path, :priority => 0.7, :changefreq => 'daily'
 end
