@@ -2,7 +2,7 @@
 <% content_for :description, "指定したエリアに存在する不動産会社の情報を見ることができます" %>
 <% content_for :is_noindex, @offices.blank? %>
 
-<h1><%= @city.prefecture.name %><%= @city.name %>の不動産会社</h1>
+<h1 class="text-center"><%= @city.prefecture.name %><%= @city.name %>の不動産会社</h1>
 <% @offices.each do |office| %>
   <%= render 'shared/company_card', office: office %>
 <% end %>

@@ -3,7 +3,7 @@
 Rails.application.routes.draw do
   get 'prefectures/:prefecture_id/cities/:city_id', to: 'cities#index', as: 'cities'
   resources :reviews
-  get 'companys/:ieul_office_id', to: 'companys#index', as: 'companys'
+  get 'offices/:ieul_office_id', to: 'offices#index', as: 'offices'
 
   resources :assessment_requests, only: %i[index create] do
     resources :thanks, only: %i[index]
