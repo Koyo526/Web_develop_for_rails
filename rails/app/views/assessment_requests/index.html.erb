@@ -20,6 +20,8 @@
             </ul>
           </div>
         <% end %>
+          <%= f.hidden_field :branch_id, value: params[:branch_id] %>
+          <%= f.hidden_field :property_city, value: params[:property_city] %>
         <div class='row'>
           <%= f.label :user_name , "お名前" %>
           <div class='col'>
