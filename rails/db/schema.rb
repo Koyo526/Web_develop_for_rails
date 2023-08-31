@@ -131,8 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_29_081404) do
     t.index ["office_id"], name: "index_reviews_on_office_id"
   end
 
-
-
   add_foreign_key "assessable_areas", "cities"
   add_foreign_key "assessable_areas", "offices"
   add_foreign_key "cities", "prefectures"

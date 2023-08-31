@@ -3,15 +3,22 @@
   <head>
     <title><%= yield(:title) || "ベテランすまい" %></title>
     <meta name="description" content="<%= yield(:description) || "Default Description" %> width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <% if yield(:is_noindex).present? %>
+        <meta name="robots" content="noindex">
+    <% end  %>
+
   </head>
 
   <body>
-    <div class="container">
+    <header class="container h1 ">ベテランすまい</header>
+    <div class="container mx-auto mt-3">
       <%= yield %>
     </div>
   </body>
