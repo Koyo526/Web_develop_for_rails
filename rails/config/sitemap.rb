@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-SitemapGenerator::Sitemap.default_host = 'http://www.example.com'
+SitemapGenerator::Sitemap.default_host = 'https://internship-a.sandbox.srv.speee.jp/'
 SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
 SitemapGenerator::Sitemap.create do
