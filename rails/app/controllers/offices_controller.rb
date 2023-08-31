@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CompaniesController < ApplicationController
+class OfficesController < ApplicationController
   def index
     return unless params[:ieul_office_id]
 
