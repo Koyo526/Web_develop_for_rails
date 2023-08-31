@@ -2,7 +2,8 @@
 
 class PrefecturesController < ApplicationController
   def index
-    @offices = Office.joins(:assessable_cities).where(assessable_cities: { id: params[:city_id] }).all.page(params[:page]).per(5)
+    @offices = Office.joins(:assessable_cities).where(assessable_cities: { id: params[:city_id] })
+                     .all.page(params[:page]).per(5)
     Rails.logger.debug params[:city_id]
     Rails.logger.debug @offices
     @city = City.find(params[:city_id])

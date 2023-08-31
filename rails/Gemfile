@@ -84,5 +84,6 @@ group :test do
   gem 'webdrivers'
 end
 
-gem 'kaminari'
+# pagenate
 gem 'bootstrap5-kaminari-views'
+gem 'kaminari'
