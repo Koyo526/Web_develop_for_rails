@@ -3,7 +3,7 @@
 class ReviewsController < ApplicationController
   def index
     if params[:id]
-      @review = Review.includes(:cities).find(params[:id])
+      @review = Review.find(params[:id])
       @company_id = @review.ieul_id
       @company_name = Company.find(@company_id).name
       @office_id = @review.ieul_office_id
