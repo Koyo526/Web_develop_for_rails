@@ -2,6 +2,8 @@
 
 class AssessmentRequestsController < ApplicationController
   def index
+    @office = Office.find(params[:branch_id])
+    @assessable_areas = @office.assessable_cities.pluck(:name,:id)
     @assessment_request = AssessmentRequest.new
   end
 
