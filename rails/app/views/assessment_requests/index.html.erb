@@ -20,7 +20,7 @@
         </ul>
       </div>
     <% end %>
-      <%= f.hidden_field :branch_id, value: params[:branch_id] %>
+      <%= f.hidden_field :branch_id, value: @office.id %>
     <div class='row mt-5'>
       <%= f.label :user_name , "お名前" %>
       <div class='col'>
@@ -49,7 +49,7 @@
     </div>
     <div class='col mt-5'>
       <%= f.label :property_address , "市区町村" %>
-      <%= f.select :uproperty_room_plan, @assessable_areas, {include_blank: "選択してください"}, class: 'form-control' %> 
+      <%= f.select :property_city, @assessable_areas, {include_blank: "選択してください"}, class: 'form-control' %> 
     </div>
     <div class='col mt-5'>
       <%= f.label :property_address , "査定依頼をする住所" %>
