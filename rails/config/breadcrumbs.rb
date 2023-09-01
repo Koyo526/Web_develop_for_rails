@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 crumb :root do
   # 各crumbで親子関係を見ることにする
 end
-crumb :offices do 
+crumb :offices do
   office = Office.find(params[:ieul_office_id])
   city = office.city
 
