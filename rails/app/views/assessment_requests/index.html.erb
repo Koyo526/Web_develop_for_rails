@@ -2,8 +2,7 @@
 <% content_for :description, "査定依頼を送ることができます" %>
 
 <h1 class="text-center">査定依頼フォーム</h1>
-<div class="row">
-    <div class="col-md-6 col-md-offset-3">
+<div class="mx-auto" style="width: 600px">
       <% flash.each do |message_type, message| %>
         <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
       <% end %>
@@ -81,14 +80,12 @@
           <%= f.label :property_exclusive_area , "専有面積（㎡）" %>
           <%= f.text_field :property_exclusive_area , class: 'form-control',placeholder: 'マンションの場合必須' %>
         </div>
-        <div class="my-3 w-25 mx-auto">
+</div>
+     <div class="my-3 w-25 mx-auto">
           <%= f.submit '査定依頼をする', class: 'btn btn-primary form-control mt-5' %>
         </div>
 
       <% end %>
       <div class="my-3 w-25 mx-auto">
         <%= link_to '戻る', "/", class: 'btn btn-secondary form-control pull-center' %>
-      </div>
-  
-
-  </div>
+    
