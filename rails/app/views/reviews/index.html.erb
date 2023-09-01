@@ -78,6 +78,6 @@
     <div>定休日：<%= @office.regular_holiday %></div>
 </div>
 <div class="mx-auto mt-3 mb-3" style="width: 200px">
-    <%= link_to '査定依頼をする', '/assessment_requests?branch_id=#{@office.id}&property_city=#{@office.prefecture_id}', class: 'btn btn-primary form-control' %>
+    <%= link_to '査定依頼をする', "/assessment_requests?branch_id=#{@office.id}&property_city=#{@office.prefecture_id}", class: 'btn btn-primary form-control' %>
 </div>
 <% end %>
