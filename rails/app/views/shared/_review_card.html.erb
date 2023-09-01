@@ -4,7 +4,7 @@
             <div><strong><%=  review.headline %>：★<%= review.contract_price_satisfaction %></strong></div>
             <div><%= review.reason_for_support_satiosfaction %></div>
             <div class=" offset-lg-7">
-                成約価格 <%= review.contract_price %>（<%= review.city.name %>・<%= review.sale_date%>に売却）
+                成約価格 <%= number_format(review.contract_price)%>（<%= review.city.name %>・<%= review.sale_date%>に売却）
             </div>
         <% end %>
     </div>
