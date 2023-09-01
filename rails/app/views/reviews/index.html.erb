@@ -2,8 +2,8 @@
 <% content_for :description, "不動産会社の口コミ情報を見ることができます" %>
 <% breadcrumb :reviews %>
 <% if @review %>
-<h1 class="text-center"><%= @review.headline %></h1>
-<div class="my-1">
+<h1 class="text-center border-bottom border-dark mt-3 mb-3"><%= @review.headline %></h1>
+<div class="my-1 ">
     <div>売却した不動産会社名：<%= @company_name %></div>
     <div>住所：<%= @review.city.name %></div>
     <div>売却の理由：<%= @review.reason_for_sale %></div>
@@ -78,7 +78,7 @@
     <div>営業時間：<%= @office.business_time %></div>
     <div>定休日：<%= @office.regular_holiday %></div>
 </div>
-<div class="mx-auto" style="width: 200px">
-    <%= link_to '査定依頼をする', '/assessment_requests?branch_id=#{@office.id}&property_city=#{@office.prefecture_id}', class: 'btn btn-primary form-control' %>
+<div class="mx-auto mt-3 mb-3" style="width: 200px">
+    <%= link_to '査定依頼をする', "/assessment_requests?branch_id=#{@office.id}&property_city=#{@office.prefecture_id}", class: 'btn btn-primary form-control' %>
 </div>
 <% end %>
