@@ -1,25 +1,21 @@
 crumb :root do
-  if params[:ieul_office_id]
-    office = Office.find(params[:ieul_office_id])
-    link City.find(office.city_id).name, cities_path(1, office.city_id)
-  elsif params[:city_id]
-    link Office.find(params[:city_id]).name, cities_path(1, params[:city_id])
-  else
-    link Review.find(params[:id]).city.name, cities_path(1, 669)
-  end
+  # 各crumbで親子関係を見ることにする
 end
 crumb :offices do 
-  if params[:ieul_office_id]
-    link Office.find(params[:ieul_office_id]).name, offices_path(params[:ieul_office_id])
-  else
-    review = Review.find(params[:id])
-    link '企業ページ', offices_path(review.ieul_office_id)
-  end
-  parent :root
+  office = Office.find(params[:ieul_office_id])
+  city = office.city
+
+  link "#{city.prefecture.name} #{city.name}", cities_path(city.prefecture, city)
+  link "#{office.company.name} #{office.name}", offices_path(office)
 end
 crumb :reviews do
-  link "口コミ詳細", reviews_path(params[:id])
-  parent :offices
+  review = Review.find(params[:id])
+  office = review.office
+  city = office.city
+
+  link "#{city.prefecture.name} #{city.name}", cities_path(city.prefecture, city)
+  link "#{office.company.name} #{office.name}", offices_path(office)
+  link review.headline, reviews_path(review)
 end
 
 # crumb :projects do
