@@ -1,5 +1,21 @@
 crumb :root do
-  link "エリアページ", cities_path
+  if params[:ieul_office_id]
+    office = Office.find(params[:ieul_office_id])
+    # City.find(office.prefecture_id).prefecture.name + 
+    link City.find(office.city_id).name, cities_path(1, Office.find(office.id).city)
+  else
+    link Office.find(params[:city_id]).name, cities_path(1, params[:city_id])
+  end
+end
+
+crumb :companys do |companys_id|
+  if companys_id
+    link '企業ページ', offices_path(companys_id)
+  else
+    companys_id = Review.find(1).ieul_office_id
+    link '企業ページ', offices_path(companys_id)
+  end
+  parent :root
 end
 
 # crumb :projects do

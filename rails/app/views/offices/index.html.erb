@@ -1,5 +1,6 @@
 <% content_for :title, "企業口コミページ" %>
 <% content_for :description, "不動産会社の情報を見ることができます" %>
+<% breadcrumb :companys %>
 <% if @office %>
     <% if @office.reviews.order(release_date: :desc).first %>
         <h1><%= @company.name %>・<%= @office.name.present? ? @office.name : "本店" %></h1>
