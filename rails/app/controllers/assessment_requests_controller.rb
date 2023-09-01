@@ -9,6 +9,8 @@ class AssessmentRequestsController < ApplicationController
 
   def create
     @assessment_request = AssessmentRequest.new(assessment_params)
+    @office = Office.find(assessment_params[:branch_id])
+    @assessable_areas = @office.assessable_cities.pluck(:name, :id)
 
     if @assessment_request.save
       ieul_api_client = Assessment::Request::IeulApiClient.new
